@@ -17,19 +17,16 @@ class FilecategorySeeder extends Seeder
         Filecategory::create(
         [
             'name' => 'SK',
-            'is_public' => 'true',
             'user_id' => '1',
         ]);
         Filecategory::create(
         [
             'name' => 'KTP',
-            'is_public' => 'false',
             'user_id' => '1',
         ]);
         Filecategory::create(
         [
             'name' => 'Akta Lahir',
-            'is_public' => 'false',
             'user_id' => '2',
         ]);
     }

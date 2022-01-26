@@ -11,7 +11,6 @@ class Filecategory extends Model
 
     protected $fillable = [
         'name',
-        'is_public',
         'user_id'
     ];
     
