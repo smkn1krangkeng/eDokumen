@@ -30,7 +30,6 @@ Instalasi:
 4. buka git bash
 <pre>
 <code>
-
 -> cd c:/xampp/htdocs/eDokumen
 -> git clone https://github.com/smkn1krangkeng/eDokumen.git
 -> cd eDokumen
