@@ -60,6 +60,8 @@ DB_PASSWORD=
 //untuk update aplikasi gunakan perintah
 -> git pull origin master
 
+-> Login: admin@test.id / 12345678 , user@test.id / 12345678
+
 </code>
 </pre>
 
