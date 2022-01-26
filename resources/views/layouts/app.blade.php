@@ -12,6 +12,9 @@
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/select2.min.css') }}" />
+        <link rel="stylesheet" href="{{ asset('css/select2-bootstrap-5-theme.min.css') }}" />
         @stack('css')
 
         @livewireStyles
@@ -36,8 +39,8 @@
         @stack('modals')
         @livewireScripts
         <script src="{{ asset('js/jquery.min.js') }}"></script>
+        <script src="{{ asset('js/select2.min.js') }}"></script>
         @stack('scripts')
-        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script>
             const Toast = Swal.mixin({
                 toast: true,

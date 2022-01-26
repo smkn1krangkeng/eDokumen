@@ -16,6 +16,7 @@ class CreateFilecategoriesTable extends Migration
         Schema::create('filecategories', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->boolean('is_public')->default(false);
             $table->foreignId('user_id')->unsigned()->nullable()->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });

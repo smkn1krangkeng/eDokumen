@@ -3,9 +3,6 @@
         {{ __('User Management') }}
     </h2>
 </x-slot>
-@push('css')
-<link rel="stylesheet" href="{{ asset('css/custom.css') }}">
-@endpush
 @push('scripts')
 <script>
     window.addEventListener('show-form', event => {

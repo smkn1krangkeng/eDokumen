@@ -20,6 +20,12 @@ eDokumen adalah suatu web app yang dibangun oleh Tim ICT SMKN 1 Krangkeng untuk 
 <li>
     <a href="https://spatie.be/docs/laravel-permission/v5/installation-laravel">spatie/laravel-permission</a>
 </li>
+<li>
+    <a href="https://sweetalert2.github.io/">sweetalert2</a>
+</li>
+<li>
+    <a href="https://github.com/apalfrey/select2-bootstrap-5-theme">Select2 Bootstrap 5 Theme</a>
+</li>
 </ul>
 
 ## How Install
