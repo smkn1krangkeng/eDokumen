@@ -7,8 +7,6 @@
 <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
 @endpush
 @push('scripts')
-<script src="{{ asset('js/jquery.min.js') }}"></script>
-<script src="{}"></script>
 <script>
     window.addEventListener('show-form', event => {
         $('#form').modal('show');

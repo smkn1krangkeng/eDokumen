@@ -35,6 +35,7 @@
 
         @stack('modals')
         @livewireScripts
+        <script src="{{ asset('js/jquery.min.js') }}"></script>
         @stack('scripts')
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script>
