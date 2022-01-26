@@ -28,7 +28,7 @@
                             </div>
                             <div class="ps-3">
                                 <div class="mb-2">
-                                    <a href="https://laravel.com/docs" class="h5 font-weight-bolder text-decoration-none text-dark">Changelog</a>
+                                    <a href="#" class="h5 font-weight-bolder text-decoration-none text-dark">Changelog</a>
                                 </div>
                                 <div class="fw-bold text-decoration-none text-muted">
                                     eDokumen (eDok)
@@ -43,7 +43,7 @@
                                     <li><span class="badge bg-danger">Remove Features</span> Penghapusan Fitur</li>
                                     <li><span class="badge bg-secondary">Notes</span> Catatan</li>
                                 </ul>
-                                <a href="#" class="text-decoration-none">
+                                <a href="https://github.com/smkn1krangkeng/eDokumen" class="text-decoration-none">
                                     <div class="mt-3 d-flex align-content-center font-weight-bold text-primary">
                                         <div>Baca lebih lanjut</div>
                                         <div class="ms-1 text-primary">
