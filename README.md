@@ -12,6 +12,7 @@ eDokumen adalah suatu web app yang dibangun oleh Tim ICT SMKN 1 Krangkeng untuk 
 <li><a href="https://github.com/nascent-africa/jetstrap">nascent-africa/jetstrap</a></li>
 <li><a href="https://spatie.be/docs/laravel-permission/v5/installation-laravel">spatie/laravel-permission</a></li>
 </ul>
+
 ## How Install
 Instalasi:
 1. Install Composer: https://getcomposer.org/Composer-Setup.exe
