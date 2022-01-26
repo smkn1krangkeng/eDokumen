@@ -5,12 +5,21 @@ eDokumen adalah suatu web app yang dibangun oleh Tim ICT SMKN 1 Krangkeng untuk 
 
 ## Package Used
 <ul>
-<li><a href="https://jetstream.laravel.com/2.x/installation.html">laravel/jetstream</a></li>
-</ul>
-<li><a href="https://laravel-livewire.com/docs/2.x/installation">livewire/livewire</a></li>
-<li><a href="https://laravel-livewire.com/docs/2.x/installation">livewire/livewire</a></li>
-<li><a href="https://github.com/nascent-africa/jetstrap">nascent-africa/jetstrap</a></li>
-<li><a href="https://spatie.be/docs/laravel-permission/v5/installation-laravel">spatie/laravel-permission</a></li>
+<li>
+    <a href="https://jetstream.laravel.com/2.x/installation.html">laravel/jetstream</a>
+</li>
+<li>
+    <a href="https://laravel-livewire.com/docs/2.x/installation">livewire/livewire</a>
+</li>
+<li>
+    <a href="https://laravel-livewire.com/docs/2.x/installation">livewire/livewire</a>
+</li>
+<li>
+    <a href="https://github.com/nascent-africa/jetstrap">nascent-africa/jetstrap</a>
+</li>
+<li>
+    <a href="https://spatie.be/docs/laravel-permission/v5/installation-laravel">spatie/laravel-permission</a>
+</li>
 </ul>
 
 ## How Install
