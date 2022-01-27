@@ -6,14 +6,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Permission\Traits\HasRoles;
 
-class Filecategory extends Model
+class Myfile extends Model
 {
     use HasFactory;
     use HasRoles;
 
     protected $fillable = [
         'name',
+        'path',
         'is_public',
+        'filecategory_id',
         'user_id'
     ];
     
@@ -21,9 +23,12 @@ class Filecategory extends Model
     {
         return $this->belongsTo(User::class);
     }
-    
-    public function myfile()
+    public function filecategory()
     {
-        return $this->hasMany(Myfile::class);
+        return $this->belongsTo(Filecategory::class);
+    }
+    public function sendfile()
+    {
+        return $this->hasMany(Sendfile::class);
     }
 }

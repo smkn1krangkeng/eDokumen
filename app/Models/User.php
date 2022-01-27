@@ -35,6 +35,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(Filecategory::class);
     }
+    public function myfile()
+    {
+        return $this->hasMany(Myfile::class);
+    }
+    public function sendfile()
+    {
+        return $this->hasMany(Sendfile::class);
+    }
 
     /**
      * The attributes that should be hidden for serialization.
