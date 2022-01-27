@@ -32,5 +32,11 @@ class FilecategorySeeder extends Seeder
             'is_public' => false,
             'user_id' => '2',
         ]);
+        Filecategory::create(
+            [
+                'name' => 'SPPD',
+                'is_public' => true,
+                'user_id' => '2',
+            ]);
     }
 }

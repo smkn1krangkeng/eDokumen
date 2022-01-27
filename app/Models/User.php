@@ -31,9 +31,9 @@ class User extends Authenticatable
         'password',
     ];
 
-    public function user()
+    public function filecategory()
     {
-        return $this->belongsTo(User::class);
+        return $this->hasMany(Filecategory::class);
     }
 
     /**

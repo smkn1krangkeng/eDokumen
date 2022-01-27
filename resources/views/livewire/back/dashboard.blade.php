@@ -38,7 +38,8 @@
                                 </div>
                                 <ul class="text-muted">
                                     <li><span class="badge bg-success">New Features</span> Fitur Baru</li>
-                                    <li><span class="badge bg-dark">Bug Fixes</span> Perbaikan Error</li>
+                                    <li><span class="badge bg-dark">Bug Fixes</span> User Management</li>
+                                    <li><span class="badge bg-dark">Bug Fixes</span> Category Management</li>
                                     <li><span class="badge bg-info">Changes</span> Perubahan</li>
                                     <li><span class="badge bg-danger">Remove Features</span> Penghapusan Fitur</li>
                                     <li><span class="badge bg-secondary">Notes</span> Catatan</li>

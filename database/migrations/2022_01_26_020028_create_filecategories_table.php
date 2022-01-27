@@ -17,7 +17,7 @@ class CreateFilecategoriesTable extends Migration
             $table->id();
             $table->string('name');
             $table->boolean('is_public')->default(false);
-            $table->foreignId('user_id')->unsigned()->nullable()->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('user_id')->unsigned()->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -4,10 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Permission\Traits\HasRoles;
 
 class Filecategory extends Model
 {
     use HasFactory;
+    use HasRoles;
 
     protected $fillable = [
         'name',
@@ -15,8 +17,8 @@ class Filecategory extends Model
         'user_id'
     ];
     
-    public function filecategory()
+    public function user()
     {
-        return $this->hasMany(Filecategory::class);
+        return $this->belongsTo(User::class);
     }
 }

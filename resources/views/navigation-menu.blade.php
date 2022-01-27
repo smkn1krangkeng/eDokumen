@@ -18,15 +18,37 @@
                     {{ __('Dashboard') }}
                 </x-jet-nav-link>
                 @hasrole('admin')
-                <x-jet-nav-link href="{{ route('userman') }}" :active="request()->routeIs('userman')" >
-                    {{ __('User Management') }}
-                </x-jet-nav-link>
+                <x-jet-dropdown id="test">
+                    <x-slot name="trigger">
+                    {{ __('Admin Menus') }}
+                    <svg class="ms-2" width="18" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 3a1 1 0 01.707.293l3 3a1 1 0 01-1.414 1.414L10 5.414 7.707 7.707a1 1 0 01-1.414-1.414l3-3A1 1 0 0110 3zm-3.707 9.293a1 1 0 011.414 0L10 14.586l2.293-2.293a1 1 0 011.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" />
+                    </svg>
+                    </x-slot>
+                    <x-slot name="content">
+                        <x-jet-dropdown-link href="{{ route('userman') }}">
+                            {{ __('User Management') }}
+                        </x-jet-dropdown-link>
+                        <x-jet-dropdown-link href="{{ route('othercat') }}">
+                            {{ __('Category Management') }}
+                        </x-jet-dropdown-link>
+                    </x-slot>
+                </x-jet-dropdown>
                 @endhasrole
-                @hasrole('admin')
-                <x-jet-nav-link href="{{ route('catman') }}" :active="request()->routeIs('catman')" >
-                    {{ __('Category Management') }}
-                </x-jet-nav-link>
-                @endhasrole
+                <x-jet-dropdown id="test">
+                    <x-slot name="trigger">
+                    {{ __('Personal Menus') }}
+                    <svg class="ms-2" width="18" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 3a1 1 0 01.707.293l3 3a1 1 0 01-1.414 1.414L10 5.414 7.707 7.707a1 1 0 01-1.414-1.414l3-3A1 1 0 0110 3zm-3.707 9.293a1 1 0 011.414 0L10 14.586l2.293-2.293a1 1 0 011.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" />
+                    </svg>
+                    </x-slot>
+                    <x-slot name="content">
+                        <x-jet-dropdown-link href="{{ route('mycatman') }}">
+                            {{ __('My File Categories') }}
+                        </x-jet-dropdown-link>
+                    </x-slot>
+                </x-jet-dropdown>
+
             </ul>
 
             <!-- Right Side Of Navbar -->

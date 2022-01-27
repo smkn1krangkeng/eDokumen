@@ -24,12 +24,17 @@ class Usermanage extends Component
 
     public function render()
     {
-        $data['users'] = User::orderByDesc('id')->paginate($this->limitPerPage);
         $data['roles'] = Role::all();
         if ($this->search !== null) {
-            $data['users'] = User::where('name','like', '%' . $this->search . '%')
-            ->latest()->paginate($this->limitPerPage);
+            $user = User::whereRelation('roles', 'name', 'like', '%' . $this->search . '%')
+            ->orWhere('name','like', '%' . $this->search . '%')
+            ->orWhere('email','like', '%' . $this->search . '%')
+            ->latest()
+            ->paginate($this->limitPerPage);
+        }else{
+            $user = User::latest()->paginate($this->limitPerPage);
         }
+        $data['users']=$user;
         return view('livewire.back.usermanage',$data)->layout('layouts.app');
     }
     
@@ -95,6 +100,8 @@ class Usermanage extends Component
         $this->user_id = $id;
         $this->states['name'] = $user->name;
         $this->states['email'] = $user->email;
+        $this->states['password'] = '';
+        $this->states['password_confirmation'] = '';
         $this->old_user_password = $user->password;
         $this->states['role'] = $user->roles->pluck('name')->implode(', ');
         $this->dispatchBrowserEvent('show-form');

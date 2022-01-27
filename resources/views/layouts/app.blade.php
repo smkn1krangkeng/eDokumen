@@ -40,6 +40,7 @@
         @livewireScripts
         <script src="{{ asset('js/jquery.min.js') }}"></script>
         <script src="{{ asset('js/select2.min.js') }}"></script>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         @stack('scripts')
         <script>
             const Toast = Swal.mixin({
