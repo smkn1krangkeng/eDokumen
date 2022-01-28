@@ -16,7 +16,7 @@ class MyfileSeeder extends Seeder
     {
         Myfile::create([
             'name' => 'File SK',
-            'filetype' => 'Document',
+            'is_pinned' => true,
             'path' => '',
             'is_public' => true,
             'filecategory_id' => '1',
@@ -24,7 +24,7 @@ class MyfileSeeder extends Seeder
         ]);
         Myfile::create([
             'name' => 'File KTP',
-            'filetype' => 'Picture',
+            'is_pinned' => false,
             'path' => '',
             'is_public' => false,
             'filecategory_id' => '2',
@@ -32,7 +32,7 @@ class MyfileSeeder extends Seeder
         ]);
         Myfile::create([
             'name' => 'File Akta Lahir',
-            'filetype' => 'Picture',
+            'is_pinned' => false,
             'path' => '',
             'is_public' => false,
             'filecategory_id' => '3',
@@ -40,7 +40,7 @@ class MyfileSeeder extends Seeder
         ]);
         Myfile::create([
             'name' => 'File SPPD',
-            'filetype' => 'Document',
+            'is_pinned' => true,
             'path' => '',
             'is_public' => true,
             'filecategory_id' => '4',

@@ -17,7 +17,7 @@ class Usermanage extends Component
     public $search;
     protected $queryString = ['search'=> ['except' => '']];
     public $limitPerPage = 2;
-    public $modeEdit;
+    public $modeEdit=false;
     public $user_id,$user_name;
     public $states=[];
     public $old_user_password;
@@ -39,24 +39,26 @@ class Usermanage extends Component
     }
     
     private function resetCreateForm(){
+        $this->modeEdit=false;
         $this->user_id = null;
         $this->states['name'] = '';
         $this->states['email'] = '';
         $this->states['password'] = '';
         $this->states['password_confirmation'] = '';
         $this->states['role'] = '';
+        $this->resetErrorBag();
+        $this->resetValidation();
     }
 
     public function add()
     {
-        $this->modeEdit='add';
+        $this->modeEdit=false;
         $this->dispatchBrowserEvent('show-form');
         $this->resetCreateForm();
     }
     
     public function remove($id)
     {
-        $this->modeEdit='delete';
         $user = User::findOrFail($id);
         $this->user_id = $id;
         $this->user_name = $user->name;
@@ -65,15 +67,28 @@ class Usermanage extends Component
 
     public function store()
     {
-        Validator::make($this->states,[
-            'name' => 'required',
-            'email' => [
-                'required','email',
-                Rule::unique('users')->ignore($this->user_id),
-            ],
-            'password' => 'nullable|min:8|confirmed',
-            'role' => 'required',
-        ])->validate();
+        if(!$this->modeEdit){ 
+            Validator::make($this->states,[
+                'name' => 'required',
+                'email' => [
+                    'required','email',
+                    Rule::unique('users')->ignore($this->user_id),
+                ],
+                'password' => 'required|min:8|confirmed',
+                'role' => 'required',
+            ])->validate();
+        }else{
+            Validator::make($this->states,[
+                'name' => 'required',
+                'email' => [
+                    'required','email',
+                    Rule::unique('users')->ignore($this->user_id),
+                ],
+                'password' => 'nullable|min:8|confirmed',
+                'role' => 'required',
+            ])->validate();
+        }
+
         if(!empty($this->states['password'])) {
             $password=Hash::make($this->states['password']);
         } else {
@@ -95,7 +110,7 @@ class Usermanage extends Component
     
     public function edit($id)
     {
-        $this->modeEdit='edit';
+        $this->modeEdit=true;
         $user = User::findOrFail($id);
         $this->user_id = $id;
         $this->states['name'] = $user->name;

@@ -16,8 +16,8 @@ class CreateMyfilesTable extends Migration
         Schema::create('myfiles', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->enum('filetype', ['Document', 'Picture','Video']);
-            $table->string('path');
+            $table->boolean('is_pinned')->default(false);
+            $table->string('path')->nullable();
             $table->boolean('is_public')->default(false);
             $table->foreignId('filecategory_id')->unsigned()->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('user_id')->unsigned()->constrained()->onUpdate('cascade')->onDelete('cascade');

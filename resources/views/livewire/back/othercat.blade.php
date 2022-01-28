@@ -33,7 +33,7 @@
                 <div class="card-body bg-white px-5 py-3 border-bottom rounded-top">
                     <div class="mx-3 my-3">
                         <div>
-                        <input class="form-control mb-3" type="text" wire:model="search" placeholder="Search..." aria-label="search">
+                        <input class="form-control mb-3" type="text" wire:model="search" placeholder="Search Name or By..." aria-label="search">
                         <div class="table-responsive">
                             <table class="table table-borderless table-hover table-rounded">
                                 <thead class="table-light">

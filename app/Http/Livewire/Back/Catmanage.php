@@ -15,17 +15,20 @@ class Catmanage extends Component
     public $search;
     protected $queryString = ['search'=> ['except' => '']];
     public $limitPerPage = 2;
-    public $modeEdit;
+    public $modeEdit=false;
     public $states=[];
     public $category_id,$category_name,$by;
 
     private function resetCreateForm(){
+        $this->modeEdit=false;
         $this->states['name'] = '';
         $this->states['is_public'] = '';
+        $this->resetErrorBag();
+        $this->resetValidation();
     }
+    
     public function remove($id)
     {
-        $this->modeEdit='delete';
         $filecategory = Filecategory::with(['user'])->findOrFail($id);
         $this->category_id = $id;
         $this->category_name = $filecategory->name;
@@ -44,13 +47,13 @@ class Catmanage extends Component
     }
     public function add()
     {
-        $this->modeEdit='add';
+        $this->modeEdit=false;
         $this->dispatchBrowserEvent('show-form');
         $this->resetCreateForm();
     }
     public function edit($id)
     {
-        $this->modeEdit='edit';
+        $this->modeEdit=true;
         $filecategory = Filecategory::findOrFail($id);
         $this->category_id = $id;
         $this->states['name'] = $filecategory->name;
@@ -61,6 +64,7 @@ class Catmanage extends Component
     {
         Validator::make($this->states,[
             'name' => 'required',
+            'is_public' => 'required',
         ])->validate();
 
         if(!empty($this->states['is_public'])) {

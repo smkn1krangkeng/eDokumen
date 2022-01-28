@@ -3,7 +3,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">@if($modeEdit=='add') Add Category @else Edit Category @endif</h5>
+        <h5 class="modal-title">@if($modeEdit) Edit Category @else Add Category @endif</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <form autocomplete="off" wire:submit.prevent="store">
@@ -16,6 +16,7 @@
         <div class="form-group mb-3">
             <label>Is Public  </label>
             <select class="form-select @error('is_public') is-invalid @enderror" wire:model.defer="states.is_public">
+                <option Selected>Please Select</option>    
                 <option value='0'>No</option>
                 <option value='1'>Yes</option>
             </select>

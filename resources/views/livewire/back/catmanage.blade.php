@@ -33,7 +33,7 @@
                 <div class="card-body bg-white px-5 py-3 border-bottom rounded-top">
                     <div class="mx-3 my-3">
                         <div>
-                        <input class="form-control mb-3" type="text" wire:model="search" placeholder="Search..." aria-label="search">
+                        <input class="form-control mb-3" type="text" wire:model="search" placeholder="Search Name..." aria-label="search">
                         <div class="table-responsive">
                             <button wire:click.prevent="add" class="btn btn-primary btn-sm mb-3 text-light">Add Category</button>
                             <table class="table table-borderless table-hover table-rounded">

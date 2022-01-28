@@ -15,12 +15,12 @@ class Othercat extends Component
     public $search;
     protected $queryString = ['search'=> ['except' => '']];
     public $limitPerPage = 2;
-    public $modeEdit;
+    public $modeEdit=false;
     public $category_id,$category_name,$by;
 
     public function remove($id)
     {
-        $this->modeEdit='delete';
+        $this->modeEdit=false;
         $filecategory = Filecategory::with(['user'])->findOrFail($id);
         $this->category_id = $id;
         $this->category_name = $filecategory->name;
