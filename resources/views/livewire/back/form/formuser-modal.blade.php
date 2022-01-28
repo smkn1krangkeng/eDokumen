@@ -7,7 +7,6 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <form autocomplete="off" wire:submit.prevent="store">
-      @csrf
       <div class="modal-body">
             <div class="form-group mb-3">
                 <label>Name</label>
@@ -59,7 +58,6 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <form autocomplete="off" wire:submit.prevent="delete({{$user_id}})">
-      @csrf
       <div class="modal-body">
         <h5 class="text-center">Apakah anda yakin ingin menghapus :
         <br>

@@ -44,7 +44,10 @@
                     </x-slot>
                     <x-slot name="content">
                         <x-jet-dropdown-link href="{{ route('mycatman') }}">
-                            {{ __('My File Categories') }}
+                            {{ __('My Files Categories') }}
+                        </x-jet-dropdown-link>
+                        <x-jet-dropdown-link href="{{ route('myfileman') }}">
+                            {{ __('My Files Manager') }}
                         </x-jet-dropdown-link>
                     </x-slot>
                 </x-jet-dropdown>

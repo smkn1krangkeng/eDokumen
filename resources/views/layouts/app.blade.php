@@ -13,14 +13,8 @@
         <!-- Styles -->
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
         <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
-        <link rel="stylesheet" href="{{ asset('css/select2.min.css') }}" />
-        <link rel="stylesheet" href="{{ asset('css/select2-bootstrap-5-theme.min.css') }}" />
         @stack('css')
-
         @livewireStyles
-
-        <!-- Scripts -->
-        <script src="{{ mix('js/app.js') }}" defer></script>
     </head>
     <body class="font-sans antialiased bg-light"> 
         @livewire('navigation-menu')
@@ -36,10 +30,11 @@
             {{ $slot }}
         </main>
 
-        @stack('modals')
+        <!-- Scripts -->
+        <script src="{{ mix('js/app.js') }}" defer></script>
         @livewireScripts
         <script src="{{ asset('js/jquery.min.js') }}"></script>
-        <script src="{{ asset('js/select2.min.js') }}"></script>
+        <!-- sweetalert2 -->
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         @stack('scripts')
         <script>

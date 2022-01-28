@@ -5,13 +5,6 @@
 </x-slot>
 @push('scripts')
 <script>
-    $(document).ready(function () {
-        $('#select2').select2({
-            theme: "bootstrap-5",
-        });
-    });
-</script>
-<script>
     window.addEventListener('show-form', event => {
         $('#form').modal('show');
     })

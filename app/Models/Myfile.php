@@ -13,6 +13,7 @@ class Myfile extends Model
 
     protected $fillable = [
         'name',
+        'filetype',
         'path',
         'is_public',
         'filecategory_id',

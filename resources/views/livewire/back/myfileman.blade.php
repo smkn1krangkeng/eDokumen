@@ -1,6 +1,6 @@
 <x-slot name="header">
     <h2 class="h4 font-weight-bold">
-        {{ __('My Files Categories') }}
+        {{ __('My Files Manager') }}
     </h2>
 </x-slot>
 @push('scripts')
@@ -26,7 +26,7 @@
 </script>
 @endpush
 <div>
-    @include('livewire.back.form.formcategory-modal')
+    @include('livewire.back.form.formmyfile-modal')
     <div class="row justify-content-center my-5">
         <div class="col-md-12">
             <div class="card shadow bg-light">
@@ -40,17 +40,21 @@
                                 <thead class="table-light">
                                     <tr>
                                         <th>No</th>
+                                        <th>Category</th>
                                         <th>Name</th>
+                                        <th>Filetype</th>
                                         <th>Is Public</th>
                                         <th>By</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($myfilecat as $key=> $row)
+                                    @foreach($myfile as $key=> $row)
                                     <tr>
-                                        <td>{{ $key+ $myfilecat->firstItem() }}</td>
+                                        <td>{{ $key+ $myfile->firstItem() }}</td>
+                                        <td>{{ $row->filecategory->name }}</td>
                                         <td>{{ $row->name }}</td>
+                                        <td>{{ $row->filetype }}</td>
                                         <td>@if($row->is_public) Yes @else No @endif</td>
                                         <td>{{ $row->user->name }}</td>
                                         <td>
@@ -61,7 +65,7 @@
                                     @endforeach
                                 </tbody>
                             </table>
-                            {{ $myfilecat->links() }}
+                            {{ $myfile->links() }}
                         </div>
                         </div>
                     </div>
