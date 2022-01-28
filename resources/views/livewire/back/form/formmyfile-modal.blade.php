@@ -14,13 +14,16 @@
             @error('name')<div class="invalid-feedback">{{ $message }}</div>@enderror
         </div>
         <div class="form-group mb-3">
-            <label>Category  </label>
-              <select class="form-select @error('filecategory_id') is-invalid @enderror" wire:model.defer="filecategory_id">
-                    <option selected>Select Category</option>    
-                  @foreach($cat as $row)
-                    <option value='{{$row->id}}'>{{$row->name}}</option>
-                  @endforeach
-              </select>
+            <label>Category</label>
+            <div class="input-group">
+            <select class="form-select @error('filecategory_id') is-invalid @enderror" wire:model.defer="filecategory_id">
+                  <option selected>Select Category</option>    
+                @foreach($cat as $row)
+                  <option value='{{$row->id}}'>{{$row->name}}</option>
+                @endforeach
+            </select>
+            <button class="btn btn-secondary" type="button">Cari</button>
+            </div>
             @error('filecategory_id')<div class="invalid-feedback">{{ $message }}</div>@enderror
         </div>
         <div class="form-group mb-3">
