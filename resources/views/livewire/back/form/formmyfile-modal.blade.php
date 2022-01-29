@@ -22,7 +22,7 @@
                   <option value='{{$row->id}}'>{{$row->name}}</option>
                 @endforeach
             </select>
-            <button class="btn btn-secondary" type="button">Cari</button>
+            <button class="btn btn-secondary rounded-end" type="button">Cari</button>
             @error('filecategory_id')<div class="invalid-feedback">{{ $message }}</div>@enderror
             </div>
         </div>
