@@ -89,7 +89,6 @@ class Myfileman extends Component
     }
     public function store()
     {
-        dd($this->filecategory_id);
         if(!$this->modeEdit){
             $this->validate([
                 'name' => 'required',
