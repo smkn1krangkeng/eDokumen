@@ -3,7 +3,26 @@
         {{ __('My Files Manager') }}
     </h2>
 </x-slot>
+@push('css')
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.2.0/dist/select2-bootstrap-5-theme.min.css" />
+@endpush
 @push('scripts')
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script>
+document.addEventListener('livewire:load', function () {
+    $('#select2').select2({
+        theme: "bootstrap-5",
+        selectionCssClass: "select2bs5",
+        dropdownCssClass: "select2bs5",
+        dropdownParent: $("#select2").parent()
+    });
+    $('#select2').on('change', function (e) {
+        var val = $('#select2').select2("val");
+        @this.set('filecategory_id', val);
+    });
+})
+</script>
 <script>
     window.addEventListener('show-form', event => {
         $('#form').modal('show');

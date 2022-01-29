@@ -15,7 +15,15 @@
         </div>
         <div class="form-group mb-3">
             <label>Category</label>
-            <div class="input-group">
+            <div wire:ignore>
+                <select style="width:100%" class="form-control" id="select2">
+                    <option value="">Select Category</option>
+                    @foreach($cat as $row)
+                    <option value="{{$row->id}}">{{$row->name}}</option>
+                    @endforeach
+                </select>
+            </div>
+<!--             <div class="input-group">
             <select class="form-select @error('filecategory_id') is-invalid @enderror" wire:model.defer="filecategory_id">
                   <option selected>Select Category</option>    
                 @foreach($cat as $row)
@@ -23,7 +31,7 @@
                 @endforeach
             </select>
             <button class="btn btn-secondary" type="button">Cari</button>
-            </div>
+            </div> -->
             @error('filecategory_id')<div class="invalid-feedback">{{ $message }}</div>@enderror
         </div>
         <div class="form-group mb-3">
