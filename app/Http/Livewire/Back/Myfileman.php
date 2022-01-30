@@ -33,6 +33,10 @@ class Myfileman extends Component
         $this->dispatchBrowserEvent('hide-form');
         $this->category=null;
     }
+    public function close_formsearchcat(){
+        $this->dispatchBrowserEvent('hide-form-searchcat');
+        $this->dispatchBrowserEvent('show-form');
+    }
     public function selectcat($id)
     {
         $this->filecategory_id=$id;

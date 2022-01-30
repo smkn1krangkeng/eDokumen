@@ -90,7 +90,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Search Category</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button wire:click.prevent="close_formsearchcat" class="btn-close"></button>
       </div>
       <div class="modal-body">
         <input class="form-control mb-2" type="text" wire:model="category" placeholder="Search Category...">
