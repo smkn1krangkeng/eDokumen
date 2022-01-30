@@ -17,7 +17,7 @@ class MyfileSeeder extends Seeder
         Myfile::create([
             'name' => 'File SK',
             'is_pinned' => true,
-            'path' => '',
+            'path' => 'samplepdf.pdf',
             'is_public' => true,
             'filecategory_id' => '1',
             'user_id' => '1',
@@ -25,7 +25,7 @@ class MyfileSeeder extends Seeder
         Myfile::create([
             'name' => 'File KTP',
             'is_pinned' => false,
-            'path' => '',
+            'path' => 'samplepdf.pdf',
             'is_public' => false,
             'filecategory_id' => '2',
             'user_id' => '1',
@@ -33,7 +33,7 @@ class MyfileSeeder extends Seeder
         Myfile::create([
             'name' => 'File Akta Lahir',
             'is_pinned' => false,
-            'path' => '',
+            'path' => 'samplepdf.pdf',
             'is_public' => false,
             'filecategory_id' => '3',
             'user_id' => '2',
@@ -41,7 +41,7 @@ class MyfileSeeder extends Seeder
         Myfile::create([
             'name' => 'File SPPD',
             'is_pinned' => true,
-            'path' => '',
+            'path' => 'samplepdf.pdf',
             'is_public' => true,
             'filecategory_id' => '4',
             'user_id' => '2',

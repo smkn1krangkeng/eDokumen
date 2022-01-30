@@ -133,8 +133,8 @@ class Myfileman extends Component
 
         $dir='myfiles/'.Auth::user()->id.'/'.$this->filecategory_id.'/';
         if(!empty($this->file)){
-            $this->deletefile($this->oldpath);
             $path=$this->file->store($dir);
+            $this->deletefile($this->oldpath);
         }else{
             $path=$this->oldpath;
         }
