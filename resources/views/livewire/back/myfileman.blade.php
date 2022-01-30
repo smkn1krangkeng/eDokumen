@@ -24,6 +24,16 @@
         $('#form-del').modal('hide');
     })
 </script>
+<script>
+    window.addEventListener('show-form-searchcat', event => {
+        $('#form-searchcat').modal('show');
+    })
+</script>
+<script>
+    window.addEventListener('hide-form-searchcat', event => {
+        $('#form-searchcat').modal('hide');
+    })
+</script>
 @endpush
 <div>
     @include('livewire.back.form.formmyfile-modal')

@@ -17,13 +17,28 @@ class Myfileman extends Component
     use WithPagination;
     use WithFileUploads;
     protected $paginationTheme = 'bootstrap';
-    public $search,$searchcat;
-    protected $queryString = ['search'=> ['except' => '']];
+    public $search;
+    protected $queryString = ['search'=> ['except' => ''],
+                              'category'=> ['except' => '']];
     public $limitPerPage = 2;
     public $modeEdit=false;
     public $myfile_id,$name,$is_pinned,$filecategory_id,$is_public;
     public $file,$path,$oldpath,$iteration;
+    public $category;
+    public $searchcat,$resultcat;
 
+    public function searchcat()
+    {
+        $this->dispatchBrowserEvent('show-form-searchcat');
+        $this->dispatchBrowserEvent('hide-form');
+        $this->category=null;
+    }
+    public function selectcat($id)
+    {
+        $this->filecategory_id=$id;
+        $this->dispatchBrowserEvent('hide-form-searchcat');
+        $this->dispatchBrowserEvent('show-form');
+    }
     private function resetCreateForm(){
         $this->name='';
         $this->is_pinned='';
@@ -78,6 +93,8 @@ class Myfileman extends Component
     public function edit($id)
     {
         $this->modeEdit=true;
+        $this->resetErrorBag();
+        $this->resetValidation();
         $myfile = Myfile::findOrFail($id);
         $this->myfile_id=$id;
         $this->name = $myfile->name;
@@ -133,6 +150,16 @@ class Myfileman extends Component
 
     public function render()
     {
+        if ($this->category !== null) {
+            $this->resultcat = Filecategory::where('user_id',Auth::user()->id)
+            ->where('name','like', '%' . $this->category . '%')
+            ->latest()
+            ->get(); 
+        }else{
+            $this->resultcat = Filecategory::where('user_id',Auth::user()->id)
+            ->latest()
+            ->get(); 
+        }
         if ($this->search !== null) {
             $myfile = Myfile::whereRelation('filecategory', 'name', 'like', '%' . $this->search . '%')
             ->where('user_id',Auth::user()->id)

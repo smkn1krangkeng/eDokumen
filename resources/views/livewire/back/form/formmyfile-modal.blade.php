@@ -22,7 +22,7 @@
                   <option value='{{$row->id}}'>{{$row->name}}</option>
                 @endforeach
             </select>
-            <button class="btn btn-secondary rounded-end" type="button">Cari</button>
+            <button wire:click.prevent="searchcat" class="btn btn-secondary rounded-end" type="button">Cari</button>
             @error('filecategory_id')<div class="invalid-feedback">{{ $message }}</div>@enderror
             </div>
         </div>
@@ -80,6 +80,24 @@
         <button type="submit" class="btn btn-danger btn-sm text-light">Delete</button>
       </div>
       </form>
+    </div>
+  </div>
+</div>
+
+<!-- Search Category Modal -->
+<div class="modal fade" wire:ignore.self id="form-searchcat" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" >
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Search Category</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <input class="form-control mb-2" type="text" wire:model="category" placeholder="Search Category...">
+       @foreach($resultcat as $row)
+        <button wire:click.prevent="selectcat({{$row->id}})" class="btn w-100 mb-1 btn-outline-secondary btn-sm text-start">{{$row->name}}</button>
+       @endforeach
+      </div>
     </div>
   </div>
 </div>
