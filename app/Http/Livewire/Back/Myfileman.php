@@ -23,7 +23,7 @@ class Myfileman extends Component
     public $limitPerPage = 2;
     public $modeEdit=false;
     public $myfile_id,$name,$is_pinned,$filecategory_id,$is_public;
-    public $file,$path,$oldpath,$iteration;
+    public $file,$path,$oldpath,$upload_id;
     public $category;
     public $searchcat,$resultcat;
 
@@ -49,7 +49,6 @@ class Myfileman extends Component
         $this->filecategory_id='';
         $this->is_public='';
         $this->file=null;
-        $this->iteration++;
         $this->path='';
         $this->oldpath='';
         $this->modeEdit=false;
@@ -91,6 +90,7 @@ class Myfileman extends Component
     public function add()
     {
         $this->modeEdit=false;
+        $this->upload_id++;
         $this->dispatchBrowserEvent('show-form');
         $this->resetCreateForm();
     }
@@ -100,7 +100,7 @@ class Myfileman extends Component
         $this->resetErrorBag();
         $this->resetValidation();
         $this->file=null;
-        $this->iteration++;
+        $this->upload_id++;
         $myfile = Myfile::findOrFail($id);
         $this->myfile_id=$id;
         $this->name = $myfile->name;
@@ -112,6 +112,7 @@ class Myfileman extends Component
     }
     public function store()
     {
+        $this->upload_id++;
         if(!$this->modeEdit){
             $this->validate([
                 'name' => 'required',

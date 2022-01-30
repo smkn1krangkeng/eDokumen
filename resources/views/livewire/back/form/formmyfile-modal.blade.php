@@ -45,8 +45,8 @@
             @error('is_pinned')<div class="invalid-feedback">{{ $message }}</div>@enderror
         </div>
         <div class="form-group mb-3">
-            <label>Upload File  </label>
-            <input id="upload{{ $iteration }}" type="file" accept="application/pdf" class="form-control @error('file') is-invalid @enderror " wire:model.defer="file" >
+            <label>Upload File  {{ $upload_id }} </label>
+            <input id="{{ $upload_id }}" type="file" accept="application/pdf" class="form-control @error('file') is-invalid @enderror " wire:model.defer="file" >
             <span class="text-info"><small>Maximum file size: 10Mb</small></span>
             @error('file')<div class="invalid-feedback">{{ $message }}</div>@enderror
         </div>
