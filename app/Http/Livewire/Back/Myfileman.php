@@ -99,6 +99,8 @@ class Myfileman extends Component
         $this->modeEdit=true;
         $this->resetErrorBag();
         $this->resetValidation();
+        $this->file=null;
+        $this->iteration++;
         $myfile = Myfile::findOrFail($id);
         $this->myfile_id=$id;
         $this->name = $myfile->name;
@@ -128,10 +130,10 @@ class Myfileman extends Component
             ]);
         }
 
-        $dir=Auth::user()->id.'/'.$this->filecategory_id.'/';
+        $dir='myfiles/'.Auth::user()->id.'/'.$this->filecategory_id.'/';
         if(!empty($this->file)){
             $this->deletefile($this->oldpath);
-            $path=$this->file->store('myfiles/'.$dir,'local');
+            $path=$this->file->store($dir);
         }else{
             $path=$this->oldpath;
         }
