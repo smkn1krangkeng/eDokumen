@@ -54,6 +54,9 @@
         </div>
       </div>
       <div class="modal-footer">
+        <div class="col" wire:loading>
+          Please Wait...
+        </div>
         <button type="button" class="btn btn-secondary btn-sm text-light" data-bs-dismiss="modal">Close</button>
         <button type="submit" wire:loading.attr="disabled" class="btn btn-primary btn-sm text-light">Save</button>
       </div>
