@@ -52,7 +52,9 @@
                                         <th>No</th>
                                         <th>Category</th>
                                         <th>Name</th>
+                                        @hasrole('admin')
                                         <th>Is Pinned</th>
+                                        @endhasrole
                                         <th>Is Public</th>
                                         <th>By</th>
                                         <th>Action</th>
@@ -64,7 +66,9 @@
                                         <td>{{ $key+ $myfile->firstItem() }}</td>
                                         <td>{{ $row->filecategory->name }}</td>
                                         <td>{{ $row->name }}</td>
+                                        @hasrole('admin')
                                         <td>@if($row->is_pinned) Yes @else No @endif</td>
+                                        @endhasrole
                                         <td>@if($row->is_public) Yes @else No @endif</td>
                                         <td>{{ $row->user->name }}</td>
                                         <td>

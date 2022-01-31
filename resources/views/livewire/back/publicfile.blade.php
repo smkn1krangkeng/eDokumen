@@ -1,6 +1,6 @@
 <x-slot name="header">
     <h2 class="h4 font-weight-bold">
-        {{ __('Category Management') }}
+        {{ __('Public Files') }}
     </h2>
 </x-slot>
 @push('scripts')

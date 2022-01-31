@@ -35,6 +35,7 @@
             </select>
             @error('is_public')<div class="invalid-feedback">{{ $message }}</div>@enderror
         </div>
+        @hasrole('admin')
         <div class="form-group mb-3">
             <label>Is Pinned</label>
             <select class="form-select @error('is_pinned') is-invalid @enderror" wire:model.defer="is_pinned">
@@ -44,6 +45,7 @@
             </select>
             @error('is_pinned')<div class="invalid-feedback">{{ $message }}</div>@enderror
         </div>
+        @endhasrole
         <div class="form-group mb-3">
             <label>Upload File</label>
             <input id="{{ $upload_id }}" type="file" accept="application/pdf" class="form-control @error('file') is-invalid @enderror " wire:model.defer="file" >
