@@ -171,11 +171,11 @@ class Myfileman extends Component
             $myfile = Myfile::whereRelation('filecategory', 'name', 'like', '%' . $this->search . '%')
             ->where('user_id',Auth::user()->id)
             ->orWhere('name','like', '%' . $this->search . '%')
-            ->latest()
+            ->orderBy('name')
             ->paginate($this->limitPerPage);
         }else{
             $myfile = Myfile::where('user_id',Auth::user()->id)
-            ->latest()
+            ->orderBy('updated_at', 'desc')
             ->paginate($this->limitPerPage);
         }
         $data['myfile']=$myfile;

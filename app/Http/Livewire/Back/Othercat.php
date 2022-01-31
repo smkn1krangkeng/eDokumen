@@ -43,10 +43,10 @@ class Othercat extends Component
         if ($this->search !== null) {
             $catUser = Filecategory::whereRelation('user', 'name', 'like', '%' . $this->search . '%')
             ->orwhere('name','like', '%' . $this->search . '%')
-            ->latest()
+            ->orderBy('name')
             ->paginate($this->limitPerPage);
         }else{
-            $catUser = Filecategory::latest()
+            $catUser = Filecategory::orderBy('updated_at', 'desc')
             ->paginate($this->limitPerPage);
         }
         $data['myfilecat']=$catUser;
