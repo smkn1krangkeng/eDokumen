@@ -160,11 +160,11 @@ class Myfileman extends Component
         if ($this->category !== null) {
             $this->resultcat = Filecategory::where('user_id',Auth::user()->id)
             ->where('name','like', '%' . $this->category . '%')
-            ->latest()
+            ->orderBy('name')
             ->get(); 
         }else{
             $this->resultcat = Filecategory::where('user_id',Auth::user()->id)
-            ->latest()
+            ->orderBy('name')
             ->get(); 
         }
         if ($this->search !== null) {
@@ -179,8 +179,9 @@ class Myfileman extends Component
             ->paginate($this->limitPerPage);
         }
         $data['myfile']=$myfile;
-        $data['cat']=Filecategory::latest()
-                ->where('user_id',Auth::user()->id)->get();
+        $data['cat']=Filecategory::where('user_id',Auth::user()->id)
+        ->orderBy('name')
+        ->get();
         return view('livewire.back.myfileman',$data)->layout('layouts.app');
     }
 }
