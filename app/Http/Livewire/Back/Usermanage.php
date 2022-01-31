@@ -29,10 +29,10 @@ class Usermanage extends Component
             $user = User::whereRelation('roles', 'name', 'like', '%' . $this->search . '%')
             ->orWhere('name','like', '%' . $this->search . '%')
             ->orWhere('email','like', '%' . $this->search . '%')
-            ->latest()
+            ->orderBy('name')
             ->paginate($this->limitPerPage);
         }else{
-            $user = User::latest()->paginate($this->limitPerPage);
+            $user = User::orderBy('updated_at', 'desc')->paginate($this->limitPerPage);
         }
         $data['users']=$user;
         return view('livewire.back.usermanage',$data)->layout('layouts.app');
