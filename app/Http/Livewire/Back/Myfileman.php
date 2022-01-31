@@ -110,7 +110,6 @@ class Myfileman extends Component
     }
     public function store()
     {
-        dd($this->file);
         if(empty($this->is_pinned)){
             $this->is_pinned=false;
         }
