@@ -48,7 +48,6 @@ class Myfileman extends Component
         $this->is_pinned='';
         $this->filecategory_id='';
         $this->is_public='';
-        $this->file=null;
         $this->path='';
         $this->oldpath='';
         $this->modeEdit=false;
@@ -99,7 +98,6 @@ class Myfileman extends Component
         $this->modeEdit=true;
         $this->resetErrorBag();
         $this->resetValidation();
-        $this->file=null;
         $this->upload_id++;
         $myfile = Myfile::findOrFail($id);
         $this->myfile_id=$id;
@@ -112,6 +110,10 @@ class Myfileman extends Component
     }
     public function store()
     {
+        dd($this->file);
+        if(empty($this->is_pinned)){
+            $this->is_pinned=false;
+        }
         $this->upload_id++;
         if(!$this->modeEdit){
             $this->validate([
