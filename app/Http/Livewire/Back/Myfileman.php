@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Myfile;
+use App\Models\User;
+use Spatie\Permission\Models\Role;
 use App\Models\Filecategory;
 use Carbon\Carbon;
 
@@ -110,9 +112,10 @@ class Myfileman extends Component
     }
     public function store()
     {
-        if(empty($this->is_pinned)){
+        if(Auth::user()->hasRole('user')){
             $this->is_pinned=false;
         }
+
         $this->upload_id++;
         if(!$this->modeEdit){
             $this->validate([
