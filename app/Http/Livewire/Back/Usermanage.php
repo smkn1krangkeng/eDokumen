@@ -3,7 +3,6 @@
 namespace App\Http\Livewire\Back;
 
 use Livewire\Component;
-use Livewire\WithPagination;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
@@ -12,11 +11,6 @@ use App\Models\User;
 
 class Usermanage extends Component
 {
-    use WithPagination;
-    protected $paginationTheme = 'bootstrap';
-    public $search;
-    protected $queryString = ['search'=> ['except' => '']];
-    public $limitPerPage = 2;
     public $modeEdit=false;
     public $user_id,$user_name;
     public $states=[];
@@ -25,15 +19,7 @@ class Usermanage extends Component
     public function render()
     {
         $data['roles'] = Role::all();
-        if ($this->search !== null) {
-            $user = User::whereRelation('roles', 'name', 'like', '%' . $this->search . '%')
-            ->orWhere('name','like', '%' . $this->search . '%')
-            ->orWhere('email','like', '%' . $this->search . '%')
-            ->orderBy('name')
-            ->paginate($this->limitPerPage);
-        }else{
-            $user = User::orderBy('updated_at', 'desc')->paginate($this->limitPerPage);
-        }
+        $user = User::orderBy('updated_at', 'desc')->get();
         $data['users']=$user;
         return view('livewire.back.usermanage',$data)->layout('layouts.app');
     }
@@ -53,6 +39,7 @@ class Usermanage extends Component
     public function add()
     {
         $this->modeEdit=false;
+        $this->dispatchBrowserEvent('show-mytable');
         $this->dispatchBrowserEvent('show-form');
         $this->resetCreateForm();
     }

@@ -16,13 +16,8 @@ use Carbon\Carbon;
 
 class Myfileman extends Component
 {
-    use WithPagination;
     use WithFileUploads;
-    protected $paginationTheme = 'bootstrap';
-    public $search;
-    protected $queryString = ['search'=> ['except' => ''],
-                              'category'=> ['except' => '']];
-    public $limitPerPage = 2;
+    protected $queryString = ['category'=> ['except' => '']];
     public $modeEdit=false;
     public $myfile_id,$name,$is_pinned,$filecategory_id,$is_public;
     public $file,$path,$oldpath,$upload_id;
@@ -171,21 +166,9 @@ class Myfileman extends Component
             ->orderBy('name')
             ->get(); 
         }
-        if ($this->search !== null) {
-            $idcat=Filecategory::where('user_id',Auth::user()->id)
-            ->where('name','like', '%' . $this->search . '%')->pluck('id');
-            $id=Myfile::where('user_id',Auth::user()->id)
-            ->where('name','like', '%' . $this->search . '%')->pluck('id');
-            $myfile = Myfile::where('user_id',Auth::user()->id)
-            ->whereIn('filecategory_id',$idcat)
-            ->orWhereIn ('id',$id)
-            ->orderBy('name')
-            ->paginate($this->limitPerPage);
-        }else{
-            $myfile = Myfile::where('user_id',Auth::user()->id)
-            ->orderBy('updated_at', 'desc')
-            ->paginate($this->limitPerPage);
-        }
+        $myfile = Myfile::where('user_id',Auth::user()->id)
+        ->orderBy('updated_at', 'desc')
+        ->get();
         $data['myfile']=$myfile;
         $data['cat']=Filecategory::where('user_id',Auth::user()->id)
         ->orderBy('name')

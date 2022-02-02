@@ -3,18 +3,12 @@
 namespace App\Http\Livewire\Back;
 
 use Livewire\Component;
-use Livewire\WithPagination;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Filecategory;
 
 class Othercat extends Component
 {
-    use WithPagination;
-    protected $paginationTheme = 'bootstrap';
-    public $search;
-    protected $queryString = ['search'=> ['except' => '']];
-    public $limitPerPage = 2;
     public $modeEdit=false;
     public $category_id,$category_name,$by;
 
@@ -40,15 +34,7 @@ class Othercat extends Component
 
     public function render()
     {
-        if ($this->search !== null) {
-            $catUser = Filecategory::whereRelation('user', 'name', 'like', '%' . $this->search . '%')
-            ->orwhere('name','like', '%' . $this->search . '%')
-            ->orderBy('name')
-            ->paginate($this->limitPerPage);
-        }else{
-            $catUser = Filecategory::orderBy('updated_at', 'desc')
-            ->paginate($this->limitPerPage);
-        }
+        $catUser = Filecategory::orderBy('updated_at', 'desc')->get();
         $data['myfilecat']=$catUser;
         return view('livewire.back.othercat',$data)->layout('layouts.app');
     }

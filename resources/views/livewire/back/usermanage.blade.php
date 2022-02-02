@@ -5,8 +5,27 @@
 </x-slot>
 @push('scripts')
 <script>
+$(document).ready( function () {
+    $('#mytable').DataTable({
+        "paging": true,
+        "pageLength": 5,
+        "lengthChange": true,
+        "lengthMenu": [ [5, 10, 50, 100, -1], [5, 10, 50, 100, "All"] ],
+        "searching": true,
+        "ordering": true,
+        "autoWidth": false,
+        "responsive": true,
+        "columnDefs": [
+            { "orderable": false, "targets": [4] },
+            { "searchable": false, "targets": [0,4] }
+        ]
+    });
+} );
+</script>
+<script>
     window.addEventListener('show-form', event => {
         $('#form').modal('show');
+        
     })
 </script>
 <script>
@@ -32,36 +51,35 @@
             <div class="card shadow bg-light">
                 <div class="card-body bg-white px-5 py-3 border-bottom rounded-top">
                     <div class="mx-3 my-3">
-                        <input class="form-control mb-3" type="text" wire:model="search" placeholder="Search..." aria-label="search">
-                        <div class="table-responsive">
-                            <button wire:click.prevent="add" class="btn btn-primary btn-sm mb-3 text-light">Add User</button>
-                            <table class="table table-borderless table-hover table-rounded">
-                                <thead class="table-light">
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Name</th>
-                                        <th>Email</th>
-                                        <th>Roles</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach($users as $key=> $row)
-                                    <tr>
-                                        <td>{{ $key+ $users->firstItem() }}</td>
-                                        <td>{{ $row->name }}</td>
-                                        <td>{{ $row->email }}</td>
-                                        <td>{{ $row->roles->pluck('name')->implode(', ') }}</td>
-                                        <td>
-                                        <button wire:click.prevent="edit({{ $row->id }})" class="btn btn-primary text-light btn-sm mb-lg-0 mb-2 me-md-1" >Edit</button>
-                                        <button wire:click.prevent="remove({{ $row->id }})" class="btn btn-danger btn-sm text-light">Delete</button>
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                            {{ $users->links() }}
-                        </div>
+                        @php
+                        $no=1;
+                        @endphp
+                        <button wire:click.prevent="add" class="btn btn-primary btn-sm mb-3 text-light">Add User</button>
+                        <table id="mytable" class="table table-borderless table-hover table-rounded">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>No</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Roles</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($users as $row)
+                                <tr>
+                                    <td>{{ $no++}}</td>
+                                    <td>{{ $row->name }}</td>
+                                    <td>{{ $row->email }}</td>
+                                    <td>{{ $row->roles->pluck('name')->implode(', ') }}</td>
+                                    <td>
+                                    <button wire:click.prevent="edit({{ $row->id }})" class="btn btn-primary text-light btn-sm me-1" >Edit</button>
+                                    <button wire:click.prevent="remove({{ $row->id }})" class="btn btn-danger btn-sm text-light">Delete</button>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

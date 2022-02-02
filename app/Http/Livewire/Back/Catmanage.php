@@ -3,18 +3,12 @@
 namespace App\Http\Livewire\Back;
 
 use Livewire\Component;
-use Livewire\WithPagination;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Filecategory;
 
 class Catmanage extends Component
 {
-    use WithPagination;
-    protected $paginationTheme = 'bootstrap';
-    public $search;
-    protected $queryString = ['search'=> ['except' => '']];
-    public $limitPerPage = 2;
     public $modeEdit=false;
     public $states=[];
     public $category_id,$category_name,$by;
@@ -87,16 +81,9 @@ class Catmanage extends Component
 
     public function render()
     {
-        if ($this->search !== null) {
-            $catUser = Filecategory::where('user_id',Auth::user()->id)
-            ->where('name','like', '%' . $this->search . '%')
-            ->orderBy('name')
-            ->paginate($this->limitPerPage);
-        }else{
-            $catUser = Filecategory::where('user_id',Auth::user()->id)
-            ->orderBy('updated_at', 'desc')
-            ->paginate($this->limitPerPage);
-        }
+        $catUser = Filecategory::where('user_id',Auth::user()->id)
+        ->orderBy('updated_at', 'desc')
+        ->get();
         $data['myfilecat']=$catUser;
         return view('livewire.back.catmanage',$data)->layout('layouts.app');
     }

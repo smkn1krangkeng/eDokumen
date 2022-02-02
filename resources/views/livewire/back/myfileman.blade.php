@@ -5,6 +5,24 @@
 </x-slot>
 @push('scripts')
 <script>
+$(document).ready(function() {
+    $('#mytable').DataTable({
+        "paging": true,
+        "pageLength": 5,
+        "lengthChange": true,
+        "lengthMenu": [ [5, 10, 50, 100, -1], [5, 10, 50, 100, "All"] ],
+        "searching": true,
+        "ordering": true,
+        "autoWidth": false,
+        "responsive": true,
+        "columnDefs": [
+            { "orderable": false, "targets": [4] },
+            { "searchable": false, "targets": [0,4] }
+        ]
+    });
+});
+</script>
+<script>
     window.addEventListener('show-form', event => {
         $('#form').modal('show');
     })
@@ -42,47 +60,44 @@
             <div class="card shadow bg-light">
                 <div class="card-body bg-white px-5 py-3 border-bottom rounded-top">
                     <div class="mx-3 my-3">
-                        <div>
-                        <input class="form-control mb-3" type="text" wire:model="search" placeholder="Search Category or Name..." aria-label="search">
-                        <div class="table-responsive">
-                            <button wire:click.prevent="add" class="btn btn-primary btn-sm mb-3 text-light">Add File</button>
-                            <table class="table table-borderless table-hover table-rounded">
-                                <thead class="table-light">
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Category</th>
-                                        <th>Name</th>
-                                        @hasrole('admin')
-                                        <th>Is Pinned</th>
-                                        @endhasrole
-                                        <th>Is Public</th>
-                                        <th>By</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach($myfile as $key=> $row)
-                                    <tr>
-                                        <td>{{ $key+ $myfile->firstItem() }}</td>
-                                        <td>{{ $row->filecategory->name }}</td>
-                                        <td>{{ $row->name }}</td>
-                                        @hasrole('admin')
-                                        <td>@if($row->is_pinned) Yes @else No @endif</td>
-                                        @endhasrole
-                                        <td>@if($row->is_public) Yes @else No @endif</td>
-                                        <td>{{ $row->user->name }}</td>
-                                        <td>
-                                        <button wire:click.prevent="edit({{$row->id}})" class="btn btn-primary text-light btn-sm mb-lg-0 mb-2 me-md-1" >Edit</button>
-                                        <button wire:click.prevent="remove({{$row->id}})" class="btn btn-danger btn-sm text-light mb-lg-0 mb-2 me-md-1">Delete</button>
-                                        <button wire:click.prevent="export({{$row->id}})" class="btn btn-success btn-sm text-light mb-lg-0 mb-2 me-md-1">Download</button>
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                            {{ $myfile->links() }}
-                        </div>
-                        </div>
+                        @php
+                        $no=1;
+                        @endphp
+                        <button wire:click.prevent="add" class="btn btn-primary btn-sm mb-3 text-light">Add File</button>
+                        <table id="mytable" class="table table-borderless table-hover table-rounded">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>No</th>
+                                    <th>Category</th>
+                                    <th>Name</th>
+                                    @hasrole('admin')
+                                    <th>Is Pinned</th>
+                                    @endhasrole
+                                    <th>Is Public</th>
+                                    <th>By</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($myfile as $row)
+                                <tr>
+                                    <td>{{ $no++}}</td>
+                                    <td>{{ $row->filecategory->name }}</td>
+                                    <td>{{ $row->name }}</td>
+                                    @hasrole('admin')
+                                    <td>@if($row->is_pinned) Yes @else No @endif</td>
+                                    @endhasrole
+                                    <td>@if($row->is_public) Yes @else No @endif</td>
+                                    <td>{{ $row->user->name }}</td>
+                                    <td>
+                                    <button wire:click.prevent="edit({{$row->id}})" class="btn btn-primary text-light btn-sm mb-lg-0 mb-2 me-md-1" >Edit</button>
+                                    <button wire:click.prevent="remove({{$row->id}})" class="btn btn-danger btn-sm text-light mb-lg-0 mb-2 me-md-1">Delete</button>
+                                    <button wire:click.prevent="export({{$row->id}})" class="btn btn-success btn-sm text-light mb-lg-0 mb-2 me-md-1">Download</button>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
