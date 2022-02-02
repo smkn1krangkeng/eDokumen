@@ -26,6 +26,9 @@ eDokumen adalah suatu web app yang dibangun oleh Tim ICT SMKN 1 Krangkeng untuk 
 <li>
     <a href="https://github.com/apalfrey/select2-bootstrap-5-theme">Select2 Bootstrap 5 Theme</a>
 </li>
+<li>
+    <a href="https://datatables.net/extensions/fixedheader/examples/integration/responsive-bootstrap.html">Datatables Bootstrap5</a>
+</li>
 </ul>
 
 ## How Install

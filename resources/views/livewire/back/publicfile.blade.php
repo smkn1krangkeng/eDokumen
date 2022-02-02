@@ -5,6 +5,24 @@
 </x-slot>
 @push('scripts')
 <script>
+$(document).ready(function() {
+    $('#mytable').DataTable({
+        "paging": true,
+        "pageLength": 5,
+        "lengthChange": true,
+        "lengthMenu": [ [5, 10, 50, 100, -1], [5, 10, 50, 100, "All"] ],
+        "searching": true,
+        "ordering": true,
+        "autoWidth": false,
+        "responsive": true,
+        "columnDefs": [
+            { "orderable": false, "targets": [4] },
+            { "searchable": false, "targets": [0,4] }
+        ]
+    });
+});
+</script>
+<script>
     window.addEventListener('show-form-del', event => {
         $('#form-del').modal('show');
     })
@@ -22,12 +40,13 @@
                 <div class="card-body bg-white px-5 py-3 border-bottom rounded-top">
                     <div class="mx-3 my-3">
                         <div>
-                        <input class="form-control mb-3" type="text" wire:model="search" placeholder="Search Name or By..." aria-label="search">
-                        <div class="table-responsive">
-                            <table class="table table-borderless table-hover table-rounded">
+                            @php
+                            $no=1;
+                            @endphp
+                            <table id="mytable" class="table table-borderless table-hover table-rounded nowrap" style="width:100%">
                                 <thead class="table-light">
                                     <tr>
-                                    <th>No</th>
+                                        <th>No</th>
                                         <th>Category</th>
                                         <th>Name</th>
                                         <th>By</th>
@@ -35,21 +54,23 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($publicfile as $key=> $row)
+                                    @foreach($publicfile as $row)
                                     <tr>
-                                    <td>{{ $key+ $publicfile->firstItem() }}</td>
+                                        <td>{{ $no++ }}</td>
                                         <td>{{ $row->filecategory->name }}</td>
                                         <td>{{ $row->name }}</td>
                                         <td>{{ $row->user->name }}</td>
                                         <td>
+                                        @if(file_exists(storage_path('app/'.$row->path)))
                                         <button wire:click.prevent="export({{$row->id}})" class="btn btn-success btn-sm text-light mb-lg-0 mb-2 me-md-1">Download</button>
+                                        @else
+                                        <button class="btn btn-secondary btn-sm text-light mb-lg-0 mb-2 me-md-1" disabled>Download</button>
+                                        @endif
                                         </td>
                                     </tr>
                                     @endforeach
                                 </tbody>
                             </table>
-                            {{ $publicfile->links() }}
-                        </div>
                         </div>
                     </div>
                 </div>

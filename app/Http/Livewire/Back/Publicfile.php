@@ -3,41 +3,28 @@
 namespace App\Http\Livewire\Back;
 
 use Livewire\Component;
-use Livewire\WithPagination;
 use App\Models\Myfile;
+use App\Models\Filecategory;
+use Carbon\Carbon;
 
 class Publicfile extends Component
 {
-    use WithPagination;
-    protected $paginationTheme = 'bootstrap';
-    public $search;
-    protected $queryString = ['search'=> ['except' => '']];
-    public $limitPerPage = 2;
 
     public function export($id){
-        dd('ini export '.$id);
+        //dd('ini export '.$id);
+        $date=Carbon::now()->format('Y-m-d');
+        $myfile = Myfile::with(['user'])->findOrFail($id);
+        $url=$myfile->path;
+        $rename=$myfile->name." (".$myfile->user->name.") (".$date.").pdf";
+        $headers = ['Content-Type: application/pdf'];
+        return response()->download(storage_path('app/'.$url),$rename,$headers);
     }
     public function render()
     {
-        if ($this->search !== null) {
-            $id=Myfile::where('name','like', '%' . $this->search . '%')->pluck('id');
-            $publicfile=Myfile::whereRelation('filecategory', 'is_public', true)
-            ->orWhere('is_public',true)
-            ->orderBy('name')
-            ->get()
-            ->whereIn('id', $id)
-            ->paginate($this->limitPerPage);
-            
-            //dd($publicfile);
-            
-            //$publicfile=$myfile->intersect($id)->all();
-
-        }else{
-            $publicfile = Myfile::whereRelation('filecategory', 'is_public', true)
-            ->orWhere('is_public',true)
-            ->orderBy('updated_at', 'desc')
-            ->paginate($this->limitPerPage);
-        }
+        $publicfile = Myfile::whereRelation('filecategory', 'is_public', true)
+        ->orWhere('is_public',true)
+        ->orderBy('updated_at', 'desc')
+        ->get();
         $data['publicfile']=$publicfile;
         return view('livewire.back.publicfile',$data)->layout('layouts.app');
     }
