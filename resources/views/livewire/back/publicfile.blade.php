@@ -61,9 +61,9 @@ $(document).ready(function() {
                                     <td>{{ $row->user->name }}</td>
                                     <td>
                                     @if(file_exists(storage_path('app/'.$row->path)))
-                                    <button wire:click.prevent="export({{$row->id}})" class="btn btn-success btn-sm text-light mb-lg-0 mb-2 me-md-1">Download</button>
+                                    <button wire:click.prevent="export({{$row->id}})" class="btn btn-success btn-sm text-light me-1">Download</button>
                                     @else
-                                    <button class="btn btn-secondary btn-sm text-light mb-lg-0 mb-2 me-md-1" disabled>Download</button>
+                                    <button class="btn btn-secondary btn-sm text-light me-1" disabled>Download</button>
                                     @endif
                                     </td>
                                 </tr>

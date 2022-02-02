@@ -90,9 +90,9 @@ $(document).ready(function() {
                                     <td>@if($row->is_public) Yes @else No @endif</td>
                                     <td>{{ $row->user->name }}</td>
                                     <td>
-                                    <button wire:click.prevent="edit({{$row->id}})" class="btn btn-primary text-light btn-sm mb-lg-0 mb-2 me-md-1" >Edit</button>
-                                    <button wire:click.prevent="remove({{$row->id}})" class="btn btn-danger btn-sm text-light mb-lg-0 mb-2 me-md-1">Delete</button>
-                                    <button wire:click.prevent="export({{$row->id}})" class="btn btn-success btn-sm text-light mb-lg-0 mb-2 me-md-1">Download</button>
+                                    <button wire:click.prevent="edit({{$row->id}})" class="btn btn-primary text-light btn-sm me-1" >Edit</button>
+                                    <button wire:click.prevent="remove({{$row->id}})" class="btn btn-danger btn-sm text-light me-1">Delete</button>
+                                    <button wire:click.prevent="export({{$row->id}})" class="btn btn-success btn-sm text-light me-1">Download</button>
                                     </td>
                                 </tr>
                                 @endforeach
