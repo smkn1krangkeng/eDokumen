@@ -93,6 +93,7 @@ class Usermanage extends Component
             'message'=>$this->user_id ? 'Data updated successfully.' : 'Data added successfully.'
         ]);
         $this->resetCreateForm();
+        return redirect()->route('userman');
     }
     
     public function edit($id)
@@ -118,5 +119,6 @@ class Usermanage extends Component
         ]);
         $this->dispatchBrowserEvent('hide-form-del');
         $this->resetCreateForm();
+        return redirect()->route('userman');
     }
 }

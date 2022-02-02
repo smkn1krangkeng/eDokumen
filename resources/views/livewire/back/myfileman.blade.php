@@ -59,7 +59,7 @@ $(document).ready(function() {
         <div class="col-md-12">
             <div class="card shadow bg-light">
                 <div class="card-body bg-white px-5 py-3 border-bottom rounded-top">
-                    <div class="mx-3 my-3">
+                    <div class="mx-3 my-3" wire:ignore>
                         @php
                         $no=1;
                         @endphp

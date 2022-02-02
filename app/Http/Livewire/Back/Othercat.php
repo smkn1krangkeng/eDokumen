@@ -29,7 +29,7 @@ class Othercat extends Component
             'message'=>'Data deleted successfully.'
         ]);
         $this->dispatchBrowserEvent('hide-form-del');
-        $this->resetCreateForm();
+        return redirect()->route('othercat');
     }
 
     public function render()

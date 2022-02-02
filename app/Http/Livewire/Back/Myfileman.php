@@ -82,6 +82,8 @@ class Myfileman extends Component
         ]);
         $this->dispatchBrowserEvent('hide-form-del');
         $this->resetCreateForm();
+        return redirect()->route('myfileman');
+        
     }
     public function add()
     {
@@ -152,6 +154,7 @@ class Myfileman extends Component
             'message'=>$this->myfile_id ? 'Data updated successfully.' : 'Data added successfully.'
         ]);
         $this->resetCreateForm();
+        return redirect()->route('myfileman');
     }
 
     public function render()

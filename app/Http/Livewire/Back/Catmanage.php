@@ -38,6 +38,7 @@ class Catmanage extends Component
         ]);
         $this->dispatchBrowserEvent('hide-form-del');
         $this->resetCreateForm();
+        return redirect()->route('mycatman');
     }
     public function add()
     {
@@ -77,6 +78,7 @@ class Catmanage extends Component
             'message'=>$this->category_id ? 'Data updated successfully.' : 'Data added successfully.'
         ]);
         $this->resetCreateForm();
+        return redirect()->route('mycatman');
     }
 
     public function render()
