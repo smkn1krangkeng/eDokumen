@@ -172,9 +172,13 @@ class Myfileman extends Component
             ->get(); 
         }
         if ($this->search !== null) {
-            $myfile = Myfile::whereRelation('filecategory', 'name', 'like', '%' . $this->search . '%')
-            ->where('user_id',Auth::user()->id)
-            ->orWhere('name','like', '%' . $this->search . '%')
+            $idcat=Filecategory::where('user_id',Auth::user()->id)
+            ->where('name','like', '%' . $this->search . '%')->pluck('id');
+            $id=Myfile::where('user_id',Auth::user()->id)
+            ->where('name','like', '%' . $this->search . '%')->pluck('id');
+            $myfile = Myfile::where('user_id',Auth::user()->id)
+            ->whereIn('filecategory_id',$idcat)
+            ->orWhereIn ('id',$id)
             ->orderBy('name')
             ->paginate($this->limitPerPage);
         }else{

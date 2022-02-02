@@ -16,7 +16,6 @@
 </script>
 @endpush
 <div>
-    @include('livewire.back.form.formothercat-modal')
     <div class="row justify-content-center my-5">
         <div class="col-md-12">
             <div class="card shadow bg-light">
@@ -28,30 +27,28 @@
                             <table class="table table-borderless table-hover table-rounded">
                                 <thead class="table-light">
                                     <tr>
-                                        <th>No</th>
+                                    <th>No</th>
+                                        <th>Category</th>
                                         <th>Name</th>
-                                        <th>Is Public</th>
                                         <th>By</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($myfilecat as $key=> $row)
+                                    @foreach($publicfile as $key=> $row)
                                     <tr>
-                                        <td>{{ $key+ $myfilecat->firstItem() }}</td>
+                                    <td>{{ $key+ $publicfile->firstItem() }}</td>
+                                        <td>{{ $row->filecategory->name }}</td>
                                         <td>{{ $row->name }}</td>
-                                        <td>@if($row->is_public) Yes @else No @endif</td>
                                         <td>{{ $row->user->name }}</td>
                                         <td>
-                                        @if($row->user->roles->pluck('name')->implode(',')!=='admin')
-                                        <button wire:click.prevent="remove({{$row->id}})" class="btn btn-danger btn-sm text-light">Delete</button>
-                                        @endif
+                                        <button wire:click.prevent="export({{$row->id}})" class="btn btn-success btn-sm text-light mb-lg-0 mb-2 me-md-1">Download</button>
                                         </td>
                                     </tr>
                                     @endforeach
                                 </tbody>
                             </table>
-                            {{ $myfilecat->links() }}
+                            {{ $publicfile->links() }}
                         </div>
                         </div>
                     </div>
