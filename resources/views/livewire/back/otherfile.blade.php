@@ -1,0 +1,114 @@
+<x-slot name="header">
+    <h2 class="h4 font-weight-bold">
+        {{ __('File Management') }}
+    </h2>
+</x-slot>
+@push('scripts')
+<script>
+    window.addEventListener('show-form-del', event => {
+        $('#form-del').modal('show');
+    })
+</script>
+<script>
+    window.addEventListener('hide-form-del', event => {
+        $('#form-del').modal('hide');
+    })
+</script>
+@endpush
+<div>
+    @include('livewire.back.form.formotherfile-modal')
+    <div class="row justify-content-center my-5">
+        <div class="col-md-12">
+            <div class="card shadow bg-light">
+                <div class="card-body bg-white px-5 py-3 border-bottom rounded-top">
+                    <div class="mx-3 my-3">
+                        sort by: {{$sortBy}}
+                        <br>
+                        paginate: {{$pagepaginate}}
+                        <br>
+                        Cari: {{$inpsearch}}
+                        <br>
+                        checked:
+                        @foreach($checked as $row)
+                         {{$row}}
+                        @endforeach
+                        <div class="row mb-3">
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <span class="input-group-text">Per Page :</span>
+                                    <select wire:model="pagepaginate" class="form-select">
+                                    <option value="2" selected>2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-2 d-flex justify-content-center">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <span class="fw-bold">Selection ( {{count($checked)}} )</span>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><button wire:click="removeselection" class="dropdown-item">Delete</button></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-8 d-flex justify-content-end">
+                                <input type="text" wire:model.debounce.500ms="inpsearch" class="form-control" placeholder="Search...">
+                            </div>
+                        </div>
+                        @if($selectPage)
+                        <div class="row mb-3">
+                            <div class="col-12 text-center">
+                                @if($selectAll)
+                                You have selected All <strong>{{$myfile->total()}}</strong> items
+                                @else
+                                You have selected <strong>{{ count($checked) }}</strong> items. Do you want to Select All <strong>{{$myfile->total()}}</strong> items ? <a href="#" wire:click="selectAll">Select All</a>
+                                @endif
+
+                            </div>
+                        </div>
+                        @endif
+                        <div class="table-responsive">
+                            <table id="mytable" class="table table-borderless table-hover table-rounded">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th class="text-center"><input type="checkbox" wire:model="selectPage"></th>
+                                        <th>No</th>
+                                        <th style="cursor:pointer;" wire:click="sortBy('filecategory')">Category</th>
+                                        <th style="cursor:pointer;" wire:click="sortBy('name')">Name</th>
+                                        <th style="cursor:pointer;" wire:click="sortBy('by')">By</th>
+                                        <th style="cursor:pointer;" wire:click="sortBy('updated_at')">updated at</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($myfile as $key => $row)
+                                    <tr class="@if($this->is_checked($row->id)) table-primary @endif">
+                                        <td class="text-center"><input type="checkbox" value="{{ $row->id }}" wire:model="checked"></td>
+                                        <td>{{ $myfile->firstItem() + $key}}</td>
+                                        <td>{{ $row->filecategory->name }}</td>
+                                        <td>{{ $row->name }}</td>
+                                        <td>{{ $row->user->name }}</td>
+                                        <td>{{ date_format($row->updated_at,"d/m/y H:i:s") }}</td>
+                                        <td>
+                                        @if(file_exists(storage_path('app/'.$row->path)))
+                                        <button wire:click.prevent="" class="btn btn-success btn-sm text-light me-1">Download</button>
+                                        @else
+                                        <button class="btn btn-secondary btn-sm text-light me-1" disabled>Download</button>
+                                        @endif
+                                        <button wire:click.prevent="remove({{$row->id}})" class="btn btn-danger btn-sm text-light">Remove</button>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                        {{ $myfile->links() }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

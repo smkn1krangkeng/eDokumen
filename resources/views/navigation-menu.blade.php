@@ -35,6 +35,9 @@
                         <x-jet-dropdown-link href="{{ route('othercat') }}">
                             {{ __('Category Management') }}
                         </x-jet-dropdown-link>
+                        <x-jet-dropdown-link href="{{ route('otherfile') }}">
+                            {{ __('Files Management') }}
+                        </x-jet-dropdown-link>
                     </x-slot>
                 </x-jet-dropdown>
                 @endhasrole

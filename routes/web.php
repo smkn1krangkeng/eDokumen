@@ -8,6 +8,7 @@ use App\Http\Livewire\Back\Catmanage;
 use App\Http\Livewire\Back\Othercat;
 use App\Http\Livewire\Back\Myfileman;
 use App\Http\Livewire\Back\Publicfile;
+use App\Http\Livewire\Back\Otherfile;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,5 +39,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::group(['middleware' => ['role:admin']], function () {
         Route::get('/userman', Usermanage::class)->name('userman');
         Route::get('/othercat', Othercat::class)->name('othercat');
+        Route::get('/otherfile', Otherfile::class)->name('otherfile');
     });
 });

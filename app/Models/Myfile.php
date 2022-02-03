@@ -32,4 +32,20 @@ class Myfile extends Model
     {
         return $this->hasMany(Sendfile::class);
     }
+    
+    public function scopeCari($query,$keyword)
+    {
+        $keyword="%$keyword%";
+        return $query->where(function($query) use ($keyword) {
+            $query->where('name','like',$keyword)
+                ->orWhereHas('user',function($query) use ($keyword){
+                        $query->where('name','like',$keyword);
+                    }
+                )
+                ->orWhereHas('filecategory',function($query) use ($keyword){
+                        $query->where('name','like',$keyword);
+                    }
+                );
+        });
+    }
 }
