@@ -24,7 +24,7 @@
                     <div class="mx-3 my-3">
                         sort by: {{$sortBy}}
                         <br>
-                        paginate: {{$pagepaginate}}
+                        paginate: {{$perhal}}
                         <br>
                         Cari: {{$inpsearch}}
                         <br>
@@ -36,7 +36,7 @@
                             <div class="col-2">
                                 <div class="input-group">
                                     <span class="input-group-text">Per Page :</span>
-                                    <select wire:model="pagepaginate" class="form-select">
+                                    <select wire:model="perhal" class="form-select">
                                     <option value="2" selected>2</option>
                                     <option value="3">3</option>
                                     <option value="4">4</option>
@@ -62,7 +62,7 @@
                         <div class="row mb-3">
                             <div class="col-12 text-center">
                                 @if($selectAll)
-                                You have selected All <strong>{{$myfile->total()}}</strong> items
+                                You have selected All <strong>{{$myfile->total()}}</strong> items. <a href="#" wire:click="deselectAll">Deselect All</a>
                                 @else
                                 You have selected <strong>{{ count($checked) }}</strong> items. Do you want to Select All <strong>{{$myfile->total()}}</strong> items ? <a href="#" wire:click="selectAll">Select All</a>
                                 @endif
@@ -98,10 +98,15 @@
                                         @else
                                         <button class="btn btn-secondary btn-sm text-light me-1" disabled>Download</button>
                                         @endif
-                                        <button wire:click.prevent="remove({{$row->id}})" class="btn btn-danger btn-sm text-light">Remove</button>
+                                        <button wire:click.prevent="removesingle({{$row->id}})" class="btn btn-danger btn-sm text-light">Remove</button>
                                         </td>
                                     </tr>
                                     @endforeach
+                                    @if(count($myfilequery) == 0)
+                                    <tr>
+                                        <td colspan="7" class="text-center">No Result</td>
+                                    </tr>
+                                    @endif
                                 </tbody>
                             </table>
                         </div>

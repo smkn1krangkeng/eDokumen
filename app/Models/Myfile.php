@@ -48,4 +48,10 @@ class Myfile extends Model
                 );
         });
     }
+    public function scopeUrutkan($query,$sortBy)
+    {
+        return $query->orderby(function($query) use ($sortBy) {
+                $query->orderBy($sortBy);
+        });
+    }
 }

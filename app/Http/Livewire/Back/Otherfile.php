@@ -12,15 +12,16 @@ class Otherfile extends Component
     protected $paginationTheme = 'bootstrap';
     public $sortBy = 'updated_at';
     public $sortDirection = 'asc';
-    public $pagepaginate = 2 ;
+    public $perhal = 2 ;
     public $checked = [];
     public $inpsearch = "";
     public $selectPage = false;
     public $selectAll = false;
+    public $myfile_id = [];
 
     //lifecylce hook get<namafungsi>Property
     public function getMyfileProperty(){
-        return $this->MyfileQuery->paginate($this->pagepaginate);
+        return $this->MyfileQuery->paginate($this->perhal);
     }
     //lifecylce hook get<namafungsi>Property
     public function getMyfileQueryProperty(){
@@ -36,16 +37,23 @@ class Otherfile extends Component
         }
     }
     //lifecylce hook updated<namavariable>
-    public function updatedSelectAll($value){
-        dd($value);
-    }
-    //lifecylce hook updated<namavariable>
     public function updatedChecked($value){
         $this->selectPage=false;
+        $this->selectAll=false;
     }
     //end lifecycle
     public function selectAll(){
         $this->selectAll=true;
+        if($this->selectAll){
+            $this->checked = $this->MyfileQuery->pluck('id')->map(fn($item) => (string) $item)->toArray();
+        }else{
+            $this->checked = [];
+        }
+    }
+    public function deselectAll(){
+        $this->selectAll=false;
+        $this->selectPage=false;
+        $this->checked = [];
     }
 
     public function sortBy($field)
@@ -62,9 +70,16 @@ class Otherfile extends Component
     }
     public function removeselection()
     {
-        $myfile=Myfile::whereKey($this->checked)->get();
-        dd($myfile);
-        //$this->dispatchBrowserEvent('show-form-delsel');
+        $this->myfile_id = $this->checked;
+        $this->dispatchBrowserEvent('show-form-del');
+    }
+    public function removesingle($id){
+        $this->myfile_id = [$id];
+        $this->dispatchBrowserEvent('show-form-del');
+    }
+    public function delete()
+    {
+        dd($this->myfile_id);   
     }
     public function render()
     {
@@ -72,6 +87,8 @@ class Otherfile extends Component
         ->cari(trim($this->inpsearch))
         ->paginate($this->pagepaginate); */
         $data['myfile']=$this->Myfile;
+        $data['myfilequery']=$this->MyfileQuery->get();
+        $data['delsel']=Myfile::with(['user','filecategory'])->find($this->myfile_id);
         return view('livewire.back.otherfile',$data)->layout('layouts.appclear');
     }
 }
