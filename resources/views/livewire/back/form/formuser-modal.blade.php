@@ -9,7 +9,7 @@
       <form autocomplete="off" wire:submit.prevent="store">
       <div class="modal-body">
             <div class="form-group mb-3">
-                <label>Name</label>
+                <label>User Name</label>
                 <input type="text" class="form-control @error('name') is-invalid @enderror " wire:model.defer="states.name" placeholder="Enter Name" >
                 @error('name')<div class="invalid-feedback">{{ $message }}</div>@enderror
             </div>
@@ -61,7 +61,7 @@
       <div class="modal-body">
         <div class="text-center fs-5">Apakah anda yakin ingin menghapus :</div>
         <div class="fw-bold text-center fs-5">{{ $user_name }}</div>
-        <div class="text-danger fs-5 text-center">Semua file pada user tersebut akan ikut terhapus !!</div>
+        <div class="text-danger fs-5 text-center">Semua file milik {{ $user_name }} akan terhapus !!</div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary btn-sm text-light" data-bs-dismiss="modal">Close</button>

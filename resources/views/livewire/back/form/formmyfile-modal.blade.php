@@ -77,7 +77,7 @@
       <div class="modal-body">
         <div class="text-center fs-5">Apakah anda yakin ingin menghapus :</div>
         <div class="fw-bold text-center fs-5">{{ $name }}</div>
-        <div class="text-danger fs-5 text-center">file akan terhapus permanen !!</div>
+        <div class="text-danger fs-5 text-center">file {{ $name }} akan terhapus permanen !!</div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary btn-sm text-light" data-bs-dismiss="modal">Close</button>

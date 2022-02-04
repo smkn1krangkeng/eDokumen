@@ -61,7 +61,7 @@ document.addEventListener('livewire:load', function () {
                             <thead class="table-light">
                                 <tr>
                                     <th>No</th>
-                                    <th>Name</th>
+                                    <th>User Name</th>
                                     <th>Email</th>
                                     <th>Roles</th>
                                     <th>Updated</th>
