@@ -42,10 +42,9 @@
       </div>
       <form autocomplete="off" wire:submit.prevent="delete({{ $category_id }})">
       <div class="modal-body">
-      <h5 class="text-center">Apakah anda yakin ingin menghapus :
-        <br>
-        <b>{{ $category_name }} by {{ $by }} </b>
-        </h5>
+        <div class="text-center fs-5">Apakah anda yakin ingin menghapus :</div>
+        <div class="fw-bold text-center fs-5">{{ $category_name }} by {{ $by }} </div>
+        <div class="text-danger fs-5 text-center">Semua file pada kategori tersebut akan ikut terhapus !!</div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary btn-sm text-light" data-bs-dismiss="modal">Close</button>

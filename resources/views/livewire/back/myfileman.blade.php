@@ -5,7 +5,7 @@
 </x-slot>
 @push('scripts')
 <script>
-$(document).ready(function() {
+document.addEventListener('livewire:load', function () {
     $('#mytable').DataTable({
         "paging": true,
         "pageLength": 5,
@@ -16,8 +16,8 @@ $(document).ready(function() {
         "autoWidth": false,
         "responsive": true,
         "columnDefs": [
-            { "orderable": false, "targets": [6] },
-            { "searchable": false, "targets": [0,6] }
+            { "orderable": false, "targets": [8] },
+            { "searchable": false, "targets": [0,8] }
         ]
     });
 });
@@ -63,7 +63,9 @@ $(document).ready(function() {
                         @php
                         $no=1;
                         @endphp
-                        <button wire:click.prevent="add" class="btn btn-primary btn-sm mb-3 text-light">Add File</button>
+                        <button wire:click.prevent="add" class="btn btn-primary btn-sm mb-3 text-light" data-bs-toggle="tooltip" data-bs-placement="top" title="Add">
+                        <i class="bi bi-plus-square"></i> <span>File</span>
+                        </button>
                         <table id="mytable" class="table table-borderless table-hover table-rounded">
                             <thead class="table-light">
                                 <tr>
@@ -75,6 +77,8 @@ $(document).ready(function() {
                                     @endhasrole
                                     <th>Is Public</th>
                                     <th>By</th>
+                                    <th>File Size</th>
+                                    <th>Updated</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -89,13 +93,23 @@ $(document).ready(function() {
                                     @endhasrole
                                     <td>@if($row->is_public) Yes @else No @endif</td>
                                     <td>{{ $row->user->name }}</td>
+                                    <td>{{ convert_bytes($row->file_size) }}</td>
+                                    <td>{{ $row->updated_at }}</td>
                                     <td>
-                                    <button wire:click.prevent="edit({{$row->id}})" class="btn btn-primary text-light btn-sm me-1" >Edit</button>
-                                    <button wire:click.prevent="remove({{$row->id}})" class="btn btn-danger btn-sm text-light me-1">Delete</button>
+                                    <button wire:click.prevent="edit({{$row->id}})" class="btn btn-primary text-light btn-sm me-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit">
+                                        <i class="bi bi-pencil-square"></i>
+                                    </button>
+                                    <button wire:click.prevent="remove({{$row->id}})" class="btn btn-danger btn-sm text-light me-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
                                     @if(file_exists(storage_path('app/'.$row->path)))
-                                    <button wire:click.prevent="export({{$row->id}})" class="btn btn-success btn-sm text-light me-1">Download</button>
+                                    <button wire:click.prevent="export({{$row->id}})" class="btn btn-success btn-sm text-light me-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Download">
+                                        <i class="bi bi-cloud-arrow-down"></i> 
+                                    </button>
                                     @else
-                                    <button class="btn btn-secondary btn-sm text-light me-1" disabled>Download</button>
+                                    <button class="btn btn-secondary btn-sm text-light me-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Download" disabled>
+                                        <i class="bi bi-cloud-arrow-down"></i>
+                                    </button>
                                     @endif
                                     </td>
                                 </tr>

@@ -5,7 +5,7 @@
 </x-slot>
 @push('scripts')
 <script>
-$(document).ready(function() {
+document.addEventListener('livewire:load', function () {
     $('#mytable').DataTable({
         "paging": true,
         "pageLength": 5,
@@ -16,8 +16,8 @@ $(document).ready(function() {
         "autoWidth": false,
         "responsive": true,
         "columnDefs": [
-            { "orderable": false, "targets": [4] },
-            { "searchable": false, "targets": [0,4] }
+            { "orderable": false, "targets": [5] },
+            { "searchable": false, "targets": [0,5] }
         ]
     });
 });
@@ -49,6 +49,7 @@ $(document).ready(function() {
                                     <th>Category</th>
                                     <th>Name</th>
                                     <th>By</th>
+                                    <th>Updated</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -59,11 +60,16 @@ $(document).ready(function() {
                                     <td>{{ $row->filecategory->name }}</td>
                                     <td>{{ $row->name }}</td>
                                     <td>{{ $row->user->name }}</td>
+                                    <td>{{ $row->updated_at }}</td>
                                     <td>
                                     @if(file_exists(storage_path('app/'.$row->path)))
-                                    <button wire:click.prevent="export({{$row->id}})" class="btn btn-success btn-sm text-light me-1">Download</button>
+                                    <button wire:click.prevent="export({{$row->id}})" class="btn btn-success btn-sm text-light me-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Download">
+                                        <i class="bi bi-cloud-arrow-down"></i>
+                                    </button>
                                     @else
-                                    <button class="btn btn-secondary btn-sm text-light me-1" disabled>Download</button>
+                                    <button class="btn btn-secondary btn-sm text-light me-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Download" disabled>
+                                        <i class="bi bi-cloud-arrow-down"></i>
+                                    </button>
                                     @endif
                                     </td>
                                 </tr>

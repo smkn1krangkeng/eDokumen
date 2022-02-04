@@ -43,7 +43,7 @@
         <script src="{{ asset('plugins/datatables-bs5/responsive/js/dataTables.responsive.min.js') }}"></script>
         <script src="{{ asset('plugins/datatables-bs5/responsive/js/responsive.bootstrap5.min.js') }}"></script>
         <!-- sweetalert2 -->
-        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="{{ asset('js/sweetalert2@11.js') }}"></script>
         @stack('scripts')
         <script>
             const Toast = Swal.mixin({

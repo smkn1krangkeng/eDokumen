@@ -5,7 +5,7 @@
 </x-slot>
 @push('scripts')
 <script>
-$(document).ready(function() {
+document.addEventListener('livewire:load', function () {
     $('#mytable').DataTable({
         "paging": true,
         "pageLength": 5,
@@ -16,8 +16,8 @@ $(document).ready(function() {
         "autoWidth": false,
         "responsive": true,
         "columnDefs": [
-            { "orderable": false, "targets": [4] },
-            { "searchable": false, "targets": [0,4] }
+            { "orderable": false, "targets": [5] },
+            { "searchable": false, "targets": [0,5] }
         ]
     });
 });
@@ -53,7 +53,9 @@ $(document).ready(function() {
                         @php
                         $no=1;
                         @endphp
-                        <button wire:click.prevent="add" class="btn btn-primary btn-sm mb-3 text-light">Add Category</button>
+                        <button wire:click.prevent="add" class="btn btn-primary btn-sm mb-3 text-light" data-bs-toggle="tooltip" data-bs-placement="top" title="Add">
+                            <i class="bi bi-plus-square"></i> <span>Category</span>
+                        </button>
                         <table id="mytable" class="table table-borderless table-hover table-rounded">
                             <thead class="table-light">
                                 <tr>
@@ -61,6 +63,7 @@ $(document).ready(function() {
                                     <th>Name</th>
                                     <th>Is Public</th>
                                     <th>By</th>
+                                    <th>Updated</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -71,9 +74,14 @@ $(document).ready(function() {
                                     <td>{{ $row->name }}</td>
                                     <td>@if($row->is_public) Yes @else No @endif</td>
                                     <td>{{ $row->user->name }}</td>
+                                    <td>{{ $row->updated_at }}</td>
                                     <td>
-                                    <button wire:click.prevent="edit({{$row->id}})" class="btn btn-primary text-light btn-sm me-1" >Edit</button>
-                                    <button wire:click.prevent="remove({{$row->id}})" class="btn btn-danger btn-sm text-light">Delete</button>
+                                    <button wire:click.prevent="edit({{$row->id}})" class="btn btn-primary text-light btn-sm me-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" >
+                                        <i class="bi bi-pencil-square"></i>
+                                    </button>
+                                    <button wire:click.prevent="remove({{$row->id}})" class="btn btn-danger btn-sm text-light" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
                                     </td>
                                 </tr>
                                 @endforeach

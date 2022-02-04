@@ -36,6 +36,7 @@ class Othercat extends Component
     {
         $catUser = Filecategory::orderBy('updated_at', 'desc')->get();
         $data['myfilecat']=$catUser;
+        $data['auth_id']=Auth::user()->id;
         return view('livewire.back.othercat',$data)->layout('layouts.app');
     }
 }

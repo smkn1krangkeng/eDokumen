@@ -135,9 +135,11 @@ class Myfileman extends Component
         $dir='myfiles/'.Auth::user()->id.'/'.$this->filecategory_id.'/';
         if(!empty($this->file)){
             $path=$this->file->store($dir);
+            $file_size=Storage::disk('local')->size($path);
             $this->deletefile($this->oldpath);
         }else{
             $path=$this->oldpath;
+            $file_size=0;
         }
         
         Myfile::updateOrCreate(['id' => $this->myfile_id], [
@@ -146,6 +148,7 @@ class Myfileman extends Component
             'filecategory_id' => $this->filecategory_id,
             'is_public' => $this->is_public,
             'path' => $path,
+            'file_size' => $file_size,
             'user_id' => Auth::user()->id
         ]);
         $this->dispatchBrowserEvent('hide-form');       

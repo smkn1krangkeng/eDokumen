@@ -84,11 +84,11 @@
                                         <td>{{ $row->myfile_updated }}</td>
                                         <td>
                                         @if(file_exists(storage_path('app/'.$row->path)))
-                                        <button wire:click.prevent="" class="btn btn-success btn-sm text-light me-1 mb-2 mb-md-0">Download</button>
+                                        <button wire:click.prevent="" class="btn btn-success btn-sm text-light me-1 mb-2 mb-md-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Download"><i class="bi bi-cloud-arrow-down-fill"></i></button>
                                         @else
-                                        <button class="btn btn-secondary btn-sm text-light me-1 mb-2 mb-md-0" disabled>Download</button>
+                                        <button class="btn btn-secondary btn-sm text-light me-1 mb-2 mb-md-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Download" disabled><i class="bi bi-cloud-arrow-down-fill"></i></button>
                                         @endif
-                                        <button wire:click.prevent="removesingle({{$row->id}})" class="btn btn-danger btn-sm text-light">Remove</button> 
+                                        <button wire:click.prevent="removesingle({{$row->id}})" class="btn btn-danger btn-sm text-light" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="bi bi-trash-fill"></i></button> 
                                     </td>
                                     </tr>
                                     @endforeach

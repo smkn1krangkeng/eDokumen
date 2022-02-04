@@ -18,6 +18,7 @@ class CreateMyfilesTable extends Migration
             $table->string('name');
             $table->boolean('is_pinned')->default(false);
             $table->string('path')->nullable();
+            $table->integer('file_size')->default(0);
             $table->boolean('is_public')->default(false);
             $table->foreignId('filecategory_id')->unsigned()->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('user_id')->unsigned()->constrained()->onUpdate('cascade')->onDelete('cascade');

@@ -15,6 +15,7 @@ class Myfile extends Model
         'name',
         'is_pinned',
         'path',
+        'file_size',
         'is_public',
         'filecategory_id',
         'user_id'
