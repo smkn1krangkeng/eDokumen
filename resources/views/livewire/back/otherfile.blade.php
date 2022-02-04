@@ -22,16 +22,6 @@
             <div class="card shadow bg-light">
                 <div class="card-body bg-white px-5 py-3 border-bottom rounded-top">
                     <div class="mx-3 my-3">
-                        sort by: {{$sortBy}}
-                        <br>
-                        paginate: {{$perhal}}
-                        <br>
-                        Cari: {{$inpsearch}}
-                        <br>
-                        checked:
-                        @foreach($checked as $row)
-                         {{$row}}
-                        @endforeach
                         <div class="row mb-3">
                             <div class="col-2">
                                 <div class="input-group">
@@ -76,10 +66,10 @@
                                     <tr>
                                         <th class="text-center"><input type="checkbox" wire:model="selectPage"></th>
                                         <th>No</th>
-                                        <th style="cursor:pointer;" wire:click="sortBy('filecategory')">Category</th>
-                                        <th style="cursor:pointer;" wire:click="sortBy('name')">Name</th>
-                                        <th style="cursor:pointer;" wire:click="sortBy('by')">By</th>
-                                        <th style="cursor:pointer;" wire:click="sortBy('updated_at')">updated at</th>
+                                        <th style="cursor:pointer;" wire:click="sortBy('category_name')">Category</th>
+                                        <th style="cursor:pointer;" wire:click="sortBy('myfile_name')">Name</th>
+                                        <th style="cursor:pointer;" wire:click="sortBy('user_name')">By</th>
+                                        <th style="cursor:pointer;" wire:click="sortBy('myfile_updated')">updated at</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -88,10 +78,10 @@
                                     <tr class="@if($this->is_checked($row->id)) table-primary @endif">
                                         <td class="text-center"><input type="checkbox" value="{{ $row->id }}" wire:model="checked"></td>
                                         <td>{{ $myfile->firstItem() + $key}}</td>
-                                        <td>{{ $row->filecategory->name }}</td>
-                                        <td>{{ $row->name }}</td>
-                                        <td>{{ $row->user->name }}</td>
-                                        <td>{{ date_format($row->updated_at,"d/m/y H:i:s") }}</td>
+                                        <td>{{ $row->category_name }}</td>
+                                        <td>{{ $row->myfile_name }}</td>
+                                        <td>{{ $row->user_name }}</td>
+                                        <td>{{ $row->myfile_updated }}</td>
                                         <td>
                                         @if(file_exists(storage_path('app/'.$row->path)))
                                         <button wire:click.prevent="" class="btn btn-success btn-sm text-light me-1">Download</button>

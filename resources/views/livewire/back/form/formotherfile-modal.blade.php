@@ -8,7 +8,7 @@
       </div>
       <form autocomplete="off" wire:submit.prevent="delete">
       <div class="modal-body">
-        <h5 class="text-center">Do you want delete this {{ count($checked) }} items ?</h5>
+        <h5 class="text-center">Do you want delete this @if($myfile_id) {{ count($myfile_id) }} @endif items ?</h5>
         <ol class="list-group list-group-numbered">
         @foreach($delsel as $row)
           <li class="list-group-item list-group-item-action">{{$row->name}} by {{$row->user->name}}</li>
@@ -16,6 +16,9 @@
         </ol>
       </div>
       <div class="modal-footer">
+        <div class="col" wire:loading>
+          Please Wait...
+        </div>
         <button type="button" class="btn btn-secondary btn-sm text-light" data-bs-dismiss="modal">Close</button>
         <button type="submit" class="btn btn-danger btn-sm text-light">Delete</button>
       </div>
