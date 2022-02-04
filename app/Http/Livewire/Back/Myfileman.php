@@ -3,7 +3,6 @@
 namespace App\Http\Livewire\Back;
 
 use Livewire\Component;
-use Livewire\WithPagination;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
