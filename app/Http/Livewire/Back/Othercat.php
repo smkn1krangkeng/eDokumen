@@ -11,6 +11,7 @@ class Othercat extends Component
 {
     public $modeEdit=false;
     public $category_id,$category_name,$by;
+    public $delfolder='';
 
     public function remove($id)
     {
@@ -19,11 +20,13 @@ class Othercat extends Component
         $this->category_id = $id;
         $this->category_name = $filecategory->name;
         $this->by = $filecategory->user->name;
+        $this->delfolder='myfiles/'.$filecategory->user_id.'/'.$filecategory->id;
         $this->dispatchBrowserEvent('show-form-del');
     }
     public function delete($id)
     {
         Filecategory::find($id)->delete();
+        Storage::disk('local')->deleteDirectory($this->delfolder);
         $this->dispatchBrowserEvent('alert',[
             'type'=>'error',
             'message'=>'Data deleted successfully.'

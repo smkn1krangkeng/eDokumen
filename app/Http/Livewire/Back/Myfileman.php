@@ -58,7 +58,7 @@ class Myfileman extends Component
     public function export($id){
         $date=Carbon::now()->format('Y-m-d');
         $myfile = Myfile::with(['user'])->findOrFail($id);
-        $url=$myfile->path;
+        $path=$myfile->path;
         $rename=$myfile->name." (".$myfile->user->name.") (".$date.").pdf";
         $headers = ['Content-Type: application/pdf'];
         return response()->download(storage_path('app/'.$url),$rename,$headers);
@@ -138,7 +138,7 @@ class Myfileman extends Component
             $this->deletefile($this->oldpath);
         }else{
             $path=$this->oldpath;
-            $file_size=0;
+            $file_size=Storage::disk('local')->size($path);
         }
         
         Myfile::updateOrCreate(['id' => $this->myfile_id], [
