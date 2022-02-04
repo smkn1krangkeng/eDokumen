@@ -3,6 +3,9 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="eDokumen(eDok) - SMK Negeri 1 Krangkeng">
+        <meta name="author" content="Unit ICT SMKN 1 Krangkeng">
+        <meta name="generator" content="eDokumen(eDok)">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>{{ config('app.name', 'Laravel') }}</title>

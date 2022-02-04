@@ -1,4 +1,7 @@
 <div>
-    <h1>eDokumen</h1>
-    <p class="lead">eDokumen adalah suatu web app yang dibangun oleh Tim ICT SMKN 1 Krangkeng untuk kebutuhan penyimpanan dan sharing file digital dari para stakeholder yang ada di SMKN 1 Krangkeng</p>
+    @include('livewire.front.sections.section1')
+    @include('livewire.front.sections.section2')
+    @include('livewire.front.sections.section3')
+    @include('livewire.front.sections.section4')
+    @include('livewire.front.sections.section5')
 </div>

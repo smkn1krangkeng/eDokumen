@@ -3,9 +3,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="eDokumen - SMK Negeri 1 Krangkeng">
+    <meta name="description" content="eDokumen(eDok) - SMK Negeri 1 Krangkeng">
     <meta name="author" content="Unit ICT SMKN 1 Krangkeng">
-    <meta name="generator" content="eDokumen V.2.0">
+    <meta name="generator" content="eDokumen(eDok)">
     <title>{{ config('app.name', 'Laravel') }}</title>
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/cover/">    
     <!-- Styles -->
