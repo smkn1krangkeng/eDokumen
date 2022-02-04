@@ -71,12 +71,12 @@ document.addEventListener('livewire:load', function () {
                                 <tr>
                                     <th>No</th>
                                     <th>Category</th>
-                                    <th>Name</th>
+                                    <th>File Name</th>
                                     @hasrole('admin')
                                     <th>Is Pinned</th>
                                     @endhasrole
                                     <th>Is Public</th>
-                                    <th>By</th>
+                                    <th>Owner</th>
                                     <th>File Size</th>
                                     <th>Updated</th>
                                     <th>Action</th>
@@ -102,7 +102,7 @@ document.addEventListener('livewire:load', function () {
                                     <button wire:click.prevent="remove({{$row->id}})" class="btn btn-danger btn-sm text-light me-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
                                         <i class="bi bi-trash"></i>
                                     </button>
-                                    @if(file_exists(storage_path('app/'.$row->path)))
+                                    @if(Storage::disk('local')->exists($row->path))
                                     <button wire:click.prevent="export({{$row->id}})" class="btn btn-success btn-sm text-light me-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Download">
                                         <i class="bi bi-cloud-arrow-down"></i> 
                                     </button>

@@ -34,8 +34,7 @@ class Catmanage extends Component
     }
     public function delete($id)
     {
-        $mycat=Filecategory::find($id);
-        $mycat->delete();
+        Filecategory::find($id)->delete();
         Storage::disk('local')->deleteDirectory($this->delfolder);
         $this->dispatchBrowserEvent('alert',[
             'type'=>'error',

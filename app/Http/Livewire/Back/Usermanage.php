@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Storage;
 use App\Models\User;
 
 class Usermanage extends Component
@@ -15,6 +16,7 @@ class Usermanage extends Component
     public $user_id,$user_name;
     public $states=[];
     public $old_user_password;
+    public $delfolder='';
 
     public function render()
     {
@@ -49,6 +51,7 @@ class Usermanage extends Component
         $user = User::findOrFail($id);
         $this->user_id = $id;
         $this->user_name = $user->name;
+        $this->delfolder='myfiles/'.$user->id;
         $this->dispatchBrowserEvent('show-form-del');
     }
 
@@ -113,6 +116,7 @@ class Usermanage extends Component
     public function delete($id)
     {
         User::find($id)->delete();
+        Storage::disk('local')->deleteDirectory($this->delfolder);
         $this->dispatchBrowserEvent('alert',[
             'type'=>'error',
             'message'=>'Data deleted successfully.'

@@ -47,8 +47,8 @@ document.addEventListener('livewire:load', function () {
                                 <tr>
                                     <th>No</th>
                                     <th>Category</th>
-                                    <th>Name</th>
-                                    <th>By</th>
+                                    <th>File Name</th>
+                                    <th>Owner</th>
                                     <th>Updated</th>
                                     <th>Action</th>
                                 </tr>
@@ -62,7 +62,7 @@ document.addEventListener('livewire:load', function () {
                                     <td>{{ $row->user->name }}</td>
                                     <td>{{ $row->updated_at }}</td>
                                     <td>
-                                    @if(file_exists(storage_path('app/'.$row->path)))
+                                    @if(Storage::disk('local')->exists($row->path))
                                     <button wire:click.prevent="export({{$row->id}})" class="btn btn-success btn-sm text-light me-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Download">
                                         <i class="bi bi-cloud-arrow-down"></i>
                                     </button>
