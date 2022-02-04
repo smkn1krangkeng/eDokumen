@@ -63,6 +63,7 @@ document.addEventListener('livewire:load', function () {
                                     <th>Category Name</th>
                                     <th>Is Public</th>
                                     <th>Owner</th>
+                                    <th>Size</th>
                                     <th>Updated</th>
                                     <th>Action</th>
                                 </tr>
@@ -74,6 +75,7 @@ document.addEventListener('livewire:load', function () {
                                     <td>{{ $row->name }}</td>
                                     <td>@if($row->is_public) Yes @else No @endif</td>
                                     <td>{{ $row->user->name }}</td>
+                                    <td>{{ get_categories_size($row->id,$row->user->id) }}</td>
                                     <td>{{ $row->updated_at }}</td>
                                     <td>
                                     <button wire:click.prevent="edit({{$row->id}})" class="btn btn-primary text-light btn-sm me-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" >

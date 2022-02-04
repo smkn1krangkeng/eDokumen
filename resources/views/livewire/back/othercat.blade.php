@@ -49,7 +49,8 @@ document.addEventListener('livewire:load', function () {
                                     <th>No</th>
                                     <th>Category Name</th>
                                     <th>Is Public</th>
-                                    <th>By</th>
+                                    <th>Owner</th>
+                                    <th>Size</th>
                                     <th>Updated</th>
                                     <th>Action</th>
                                 </tr>
@@ -61,6 +62,7 @@ document.addEventListener('livewire:load', function () {
                                     <td>{{ $row->name }}</td>
                                     <td>@if($row->is_public) Yes @else No @endif</td>
                                     <td>{{ $row->user->name }}</td>
+                                    <td>{{ get_categories_size($row->id,$row->user->id) }}</td>
                                     <td>{{ $row->updated_at }}</td>
                                     <td>
                                     @if(($row->user->roles->pluck('name')->implode(',')!=='admin') or ($auth_id == $row->user_id))

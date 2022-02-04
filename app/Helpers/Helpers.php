@@ -1,5 +1,18 @@
 <?php
 
+use App\Models\Myfile;
+use Illuminate\Support\Arr;
+
+function get_categories_size($category_id,$user_id){
+    $myfile = Myfile::Where('filecategory_id',$category_id)
+    ->where('user_id',$user_id)
+    ->selectRaw("SUM(file_size) as category_size")
+    ->groupBy('filecategory_id')
+    ->groupBy('user_id')
+    ->first();
+    return convert_bytes(Arr::get($myfile, 'category_size'));
+}
+
 function convert_bytes($set_bytes){
     $set_kb = 1024;
     $set_mb = $set_kb * 1024;

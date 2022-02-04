@@ -49,6 +49,7 @@ document.addEventListener('livewire:load', function () {
                                     <th>Category</th>
                                     <th>File Name</th>
                                     <th>Owner</th>
+                                    <th>File Size</th>
                                     <th>Updated</th>
                                     <th>Action</th>
                                 </tr>
@@ -60,6 +61,7 @@ document.addEventListener('livewire:load', function () {
                                     <td>{{ $row->filecategory->name }}</td>
                                     <td>{{ $row->name }}</td>
                                     <td>{{ $row->user->name }}</td>
+                                    <td>{{ convert_bytes($row->file_size) }}</td>
                                     <td>{{ $row->updated_at }}</td>
                                     <td>
                                     @if(Storage::disk('local')->exists($row->path))
