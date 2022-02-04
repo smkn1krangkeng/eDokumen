@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Back;
 use Livewire\Component;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Filecategory;
 
 class Catmanage extends Component
@@ -12,6 +13,7 @@ class Catmanage extends Component
     public $modeEdit=false;
     public $states=[];
     public $category_id,$category_name,$by;
+    public $delfolder='';
 
     private function resetCreateForm(){
         $this->modeEdit=false;
@@ -27,11 +29,14 @@ class Catmanage extends Component
         $this->category_id = $id;
         $this->category_name = $filecategory->name;
         $this->by = $filecategory->user->name;
+        $this->delfolder='myfiles/'.$filecategory->user_id.'/'.$filecategory->id;
         $this->dispatchBrowserEvent('show-form-del');
     }
     public function delete($id)
     {
-        Filecategory::find($id)->delete();
+        $mycat=Filecategory::find($id);
+        $mycat->delete();
+        Storage::disk('local')->deleteDirectory($this->delfolder);
         $this->dispatchBrowserEvent('alert',[
             'type'=>'error',
             'message'=>'Data deleted successfully.'

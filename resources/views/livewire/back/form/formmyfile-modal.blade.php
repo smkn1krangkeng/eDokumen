@@ -75,10 +75,9 @@
       </div>
       <form autocomplete="off" wire:submit.prevent="delete({{ $myfile_id }})">
       <div class="modal-body">
-      <h5 class="text-center">Apakah anda yakin ingin menghapus :
-        <br>
-        <b>{{ $name }}</b>
-        </h5>
+        <div class="text-center fs-5">Apakah anda yakin ingin menghapus :</div>
+        <div class="fw-bold text-center fs-5">{{ $name }}</div>
+        <div class="text-danger fs-5 text-center">file akan terhapus permanen !!</div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary btn-sm text-light" data-bs-dismiss="modal">Close</button>
