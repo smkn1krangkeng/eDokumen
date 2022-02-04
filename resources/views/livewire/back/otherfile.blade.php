@@ -23,7 +23,7 @@
                 <div class="card-body bg-white px-5 py-3 border-bottom rounded-top">
                     <div class="mx-3 my-3">
                         <div class="row mb-3">
-                            <div class="col-2">
+                            <div class="col-12 col-md-2 mb-2 mb-md-0">
                                 <div class="input-group">
                                     <span class="input-group-text">Per Page :</span>
                                     <select wire:model="perhal" class="form-select">
@@ -34,8 +34,8 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-2 d-flex justify-content-center">
-                                <div class="btn-group">
+                            <div class="col-12 col-md-2 mb-2 mb-md-0 d-flex justify-content-center">
+                                <div class="btn-group w-100">
                                     <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                         <span class="fw-bold">Selection ( {{count($checked)}} )</span>
                                     </button>
@@ -44,7 +44,7 @@
                                     </ul>
                                 </div>
                             </div>
-                            <div class="col-8 d-flex justify-content-end">
+                            <div class="col-12 col-md-8 d-flex justify-content-end">
                                 <input type="text" wire:model.debounce.500ms="inpsearch" class="form-control" placeholder="Search...">
                             </div>
                         </div>
@@ -84,12 +84,12 @@
                                         <td>{{ $row->myfile_updated }}</td>
                                         <td>
                                         @if(file_exists(storage_path('app/'.$row->path)))
-                                        <button wire:click.prevent="" class="btn btn-success btn-sm text-light me-1">Download</button>
+                                        <button wire:click.prevent="" class="btn btn-success btn-sm text-light me-1 mb-2 mb-md-0">Download</button>
                                         @else
-                                        <button class="btn btn-secondary btn-sm text-light me-1" disabled>Download</button>
+                                        <button class="btn btn-secondary btn-sm text-light me-1 mb-2 mb-md-0" disabled>Download</button>
                                         @endif
-                                        <button wire:click.prevent="removesingle({{$row->id}})" class="btn btn-danger btn-sm text-light">Remove</button>
-                                        </td>
+                                        <button wire:click.prevent="removesingle({{$row->id}})" class="btn btn-danger btn-sm text-light">Remove</button> 
+                                    </td>
                                     </tr>
                                     @endforeach
                                     @if(count($myfilequery) == 0)

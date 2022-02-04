@@ -16,8 +16,8 @@ $(document).ready(function() {
         "autoWidth": false,
         "responsive": true,
         "columnDefs": [
-            { "orderable": false, "targets": [4] },
-            { "searchable": false, "targets": [0,4] }
+            { "orderable": false, "targets": [6] },
+            { "searchable": false, "targets": [0,6] }
         ]
     });
 });
@@ -92,7 +92,11 @@ $(document).ready(function() {
                                     <td>
                                     <button wire:click.prevent="edit({{$row->id}})" class="btn btn-primary text-light btn-sm me-1" >Edit</button>
                                     <button wire:click.prevent="remove({{$row->id}})" class="btn btn-danger btn-sm text-light me-1">Delete</button>
+                                    @if(file_exists(storage_path('app/'.$row->path)))
                                     <button wire:click.prevent="export({{$row->id}})" class="btn btn-success btn-sm text-light me-1">Download</button>
+                                    @else
+                                    <button class="btn btn-secondary btn-sm text-light me-1" disabled>Download</button>
+                                    @endif
                                     </td>
                                 </tr>
                                 @endforeach
