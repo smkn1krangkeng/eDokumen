@@ -9,7 +9,7 @@
       <form autocomplete="off" method="post" enctype="multipart/form-data" wire:submit.prevent="store">
       <div class="modal-body">
         <div class="form-group mb-3">
-            <label>Name</label>
+            <label>File Name</label>
             <input type="text" class="form-control @error('name') is-invalid @enderror " wire:model.defer="name" placeholder="Enter Name" >
             @error('name')<div class="invalid-feedback">{{ $message }}</div>@enderror
         </div>
