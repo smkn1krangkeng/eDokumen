@@ -6,18 +6,19 @@
 @push('scripts')
 <script>
 document.addEventListener('livewire:load', function () {
-    $('#mytable').DataTable({
+    var table = $('#mytable').DataTable({
         "paging": true,
-        "pageLength": 5,
+        "pageLength": 3,
         "lengthChange": true,
-        "lengthMenu": [ [5, 10, 50, 100, -1], [5, 10, 50, 100, "All"] ],
+        "lengthMenu": [ [3, 10, 50, 100, -1], [3, 10, 50, 100, "All"] ],
         "searching": true,
         "ordering": true,
         "autoWidth": false,
         "responsive": true,
+        "order": [[ 1, "asc" ]],
         "columnDefs": [
-            { "orderable": false, "targets": [5] },
-            { "searchable": false, "targets": [0,5] }
+            { "orderable": false, "targets": [0,6] },
+            { "searchable": false, "targets": [0,6] }
         ]
     });
 } );
@@ -49,45 +50,64 @@ document.addEventListener('livewire:load', function () {
     <div class="row justify-content-center my-5">
         <div class="col-md-12">
             <div class="card shadow bg-light">
-                <div class="card-body bg-white px-5 py-3 border-bottom rounded-top">
-                    <div class="mx-3 my-3" wire:ignore>
+                <div class="card-body bg-white px-5 py-3 border-bottom rounded-top">  
+                    <div class="mx-3 my-3">
                         @php
                         $no=1;
                         @endphp
-                        <button wire:click.prevent="add" class="btn btn-primary btn-sm mb-3 text-light" data-bs-toggle="tooltip" data-bs-placement="top" title="Add">
-                            <i class="bi bi-plus-square"></i> <span>User</span>
-                        </button>
-                        <table id="mytable" class="table table-borderless table-hover table-rounded">
-                            <thead class="table-light">
-                                <tr>
-                                    <th>No</th>
-                                    <th>User Name</th>
-                                    <th>Email</th>
-                                    <th>Roles</th>
-                                    <th>Updated</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($users as $row)
-                                <tr>
-                                    <td>{{ $no++}}</td>
-                                    <td>{{ $row->name }}</td>
-                                    <td>{{ $row->email }}</td>
-                                    <td>{{ $row->roles->pluck('name')->implode(', ') }}</td>
-                                    <td>{{ $row->updated_at }}</td>
-                                    <td>
-                                    <button wire:click.prevent="edit({{ $row->id }})" class="btn btn-primary text-light btn-sm me-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit">
-                                        <i class="bi bi-pencil-square"></i>
+                        <div class="row text-center text-md-start ">
+                            <div class="col-12 col-md-2">
+                                <button wire:click.prevent="add" class="btn btn-primary btn-sm mb-3 text-light" data-bs-toggle="tooltip" data-bs-placement="top" title="Add">
+                                    <i class="bi bi-plus-square"></i> <span>User</span>
+                                </button>
+                            </div>
+                            <div class="col-12 col-md-4">
+                                <div class="btn-group">
+                                    <button class="btn btn-success text-light btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Selection ( {{ count($subchecked) }} )
                                     </button>
-                                    <button wire:click.prevent="remove({{ $row->id }})" class="btn btn-danger btn-sm text-light" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
-                                        <i class="bi bi-trash"></i>
-                                    </button>
-                                    </td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                                    <ul class="dropdown-menu">
+                                        <li><button class="dropdown-item">Select All (25)</button><li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        {{print_r($subchecked)}} {{print_r($valueCheckedPage)}}
+                        <div wire:ignore>
+                            <table id="mytable" class="table table-borderless table-hover table-rounded">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th class="text-center"><input type="checkbox" wire:model="selectAll"></th>
+                                        <th>No</th>
+                                        <th>User Name</th>
+                                        <th>Email</th>
+                                        <th>Roles</th>
+                                        <th>Updated</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($users as $row)
+                                    <tr>
+                                        <td class="text-center"><input type="checkbox" name="vehicle" value="{{ $row->id }}" wire:model="subchecked"></td>
+                                        <td>{{ $no++}}</td>
+                                        <td>{{ $row->name }}</td>
+                                        <td>{{ $row->email }}</td>
+                                        <td>{{ $row->roles->pluck('name')->implode(', ') }}</td>
+                                        <td>{{ $row->updated_at }}</td>
+                                        <td>
+                                        <button wire:click.prevent="edit({{ $row->id }})" class="btn btn-primary text-light btn-sm me-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit">
+                                            <i class="bi bi-pencil-square"></i>
+                                        </button>
+                                        <button wire:click.prevent="remove({{ $row->id }})" class="btn btn-danger btn-sm text-light" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>

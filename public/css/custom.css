@@ -1,5 +1,8 @@
-.select2bs5{
-  background-color:#f8fafc !important;
+ul.dropdown-menu.show {
+  font-size:12.6px;
+  padding:4px 8px;
+  font-family: "Nunito", "ui-sans-serif", "system-ui";
+  width:160px;
 }
 .table-rounded {
     border-collapse: separate !important;

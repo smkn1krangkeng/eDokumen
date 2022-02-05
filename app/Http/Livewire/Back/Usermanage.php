@@ -9,6 +9,7 @@ use Spatie\Permission\Models\Role;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Storage;
 use App\Models\User;
+use Illuminate\Support\Collection;
 
 class Usermanage extends Component
 {
@@ -17,6 +18,9 @@ class Usermanage extends Component
     public $states=[];
     public $old_user_password;
     public $delfolder='';
+    public $subchecked=[];
+    public $selectAll=false;
+    public $valueCheckedPage=[];
 
     public function render()
     {
@@ -24,6 +28,28 @@ class Usermanage extends Component
         $user = User::orderBy('updated_at', 'desc')->get();
         $data['users']=$user;
         return view('livewire.back.usermanage',$data)->layout('layouts.app');
+    }
+
+    public function updatedSelectAll($value){
+        if($value){
+            $this->subchecked=User::pluck('id')->toArray();
+        }else{
+            $this->subchecked=[];
+            $this->valueCheckedPage=[];
+        }
+        
+        if(empty(array_diff($this->valueCheckedPage,$this->subchecked))){
+            $this->valueCheckedPage=$this->subchecked;
+        };
+    }
+    
+    public function updatedSubchecked($value){
+        $araydiff = array_diff($this->valueCheckedPage,$this->subchecked);
+        if(empty($araydiff)){
+            $this->selectAll=true;
+        }else{
+            $this->selectAll=false;
+        }
     }
     
     private function resetCreateForm(){
