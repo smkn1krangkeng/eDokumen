@@ -3,9 +3,16 @@
         {{ __('User Management') }}
     </h2>
 </x-slot>
+@push('css')
+<link type="text/css" href="//cdn.datatables.net/select/1.3.4/css/select.dataTables.min.css" rel="stylesheet" />
+<link type="text/css" href="//gyrocode.github.io/jquery-datatables-checkboxes/1.2.12/css/dataTables.checkboxes.css" rel="stylesheet" />
+@endpush
 @push('scripts')
+<script type="text/javascript" src="//cdn.datatables.net/select/1.3.4/js/dataTables.select.min.js"></script>
+<script type="text/javascript" src="//gyrocode.github.io/jquery-datatables-checkboxes/1.2.12/js/dataTables.checkboxes.min.js"></script>
 <script>
 document.addEventListener('livewire:load', function () {
+    var events = $('#events');
     var table = $('#mytable').DataTable({
         "paging": true,
         "pageLength": 3,
@@ -15,18 +22,41 @@ document.addEventListener('livewire:load', function () {
         "ordering": true,
         "autoWidth": false,
         "responsive": true,
+        "bInfo" : false,
         "order": [[ 1, "asc" ]],
         "columnDefs": [
-            { "orderable": false, "targets": [0,6] },
-            { "searchable": false, "targets": [0,6] }
-        ]
+            { "orderable": false, "targets": [0,2,7] },
+            { "searchable": false, "targets": [0,2,7] },
+            { "visible": false, "targets": [2] },
+            { 'checkboxes': {
+                'selectRow': true,
+                'selectAllPages':false,
+                'selectAllRender':'<input type="checkbox" class="form-check-input">'
+            }, 'targets': 0}
+        ],
+        "select": {
+            "style": "multi"
+        },
     });
+    
+    table
+        .on( 'select', function ( e, dt, type, indexes ) {
+            var ids = $.map(table.rows('.selected').data(), function (item) {
+            return item[2]
+            });
+            @this.checked=ids;
+        })
+        .on( 'deselect', function ( e, dt, type, indexes ) {
+            var ids = $.map(table.rows('.selected').data(), function (item) {
+            return item[2]
+            });
+            @this.checked=ids;
+        });
 } );
 </script>
 <script>
     window.addEventListener('show-form', event => {
         $('#form').modal('show');
-        
     })
 </script>
 <script>
@@ -42,6 +72,16 @@ document.addEventListener('livewire:load', function () {
 <script>
     window.addEventListener('hide-form-del', event => {
         $('#form-del').modal('hide');
+    })
+</script>
+<script>
+    window.addEventListener('show-form-delsel', event => {
+        $('#form-delsel').modal('show');
+    })
+</script>
+<script>
+    window.addEventListener('hide-form-delsel', event => {
+        $('#form-delsel').modal('hide');
     })
 </script>
 @endpush
@@ -61,24 +101,19 @@ document.addEventListener('livewire:load', function () {
                                     <i class="bi bi-plus-square"></i> <span>User</span>
                                 </button>
                             </div>
-                            <div class="col-12 col-md-4">
-                                <div class="btn-group">
-                                    <button class="btn btn-success text-light btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        Selection ( {{ count($subchecked) }} )
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        <li><button class="dropdown-item">Select All (25)</button><li>
-                                    </ul>
-                                </div>
+                            <div class="col-12 col-md-10">
+                                <button wire:click.prevent="removesel" class="btn btn-danger btn-sm mb-3 text-light" data-bs-toggle="tooltip" data-bs-placement="top" title="Add">
+                                    Delete {{ count($checked) }} selected items
+                                </button>
                             </div>
                         </div>
-                        {{print_r($subchecked)}} {{print_r($valueCheckedPage)}}
                         <div wire:ignore>
                             <table id="mytable" class="table table-borderless table-hover table-rounded">
                                 <thead class="table-light">
                                     <tr>
-                                        <th class="text-center"><input type="checkbox" wire:model="selectAll"></th>
+                                        <th></th>
                                         <th>No</th>
+                                        <th class="d-none">id</th>
                                         <th>User Name</th>
                                         <th>Email</th>
                                         <th>Roles</th>
@@ -89,8 +124,9 @@ document.addEventListener('livewire:load', function () {
                                 <tbody>
                                     @foreach($users as $row)
                                     <tr>
-                                        <td class="text-center"><input type="checkbox" name="vehicle" value="{{ $row->id }}" wire:model="subchecked"></td>
+                                        <td></td>
                                         <td>{{ $no++}}</td>
+                                        <td class="d-none">{{ $row->id }}</td>
                                         <td>{{ $row->name }}</td>
                                         <td>{{ $row->email }}</td>
                                         <td>{{ $row->roles->pluck('name')->implode(', ') }}</td>

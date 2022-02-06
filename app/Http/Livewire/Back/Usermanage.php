@@ -18,38 +18,18 @@ class Usermanage extends Component
     public $states=[];
     public $old_user_password;
     public $delfolder='';
-    public $subchecked=[];
-    public $selectAll=false;
-    public $valueCheckedPage=[];
+    public $checked=[];
+    public $checkedValue;
 
     public function render()
     {
         $data['roles'] = Role::all();
-        $user = User::orderBy('updated_at', 'desc')->get();
+        $user = User::orderBy('name', 'desc')->get();
         $data['users']=$user;
         return view('livewire.back.usermanage',$data)->layout('layouts.app');
     }
-
-    public function updatedSelectAll($value){
-        if($value){
-            $this->subchecked=User::pluck('id')->toArray();
-        }else{
-            $this->subchecked=[];
-            $this->valueCheckedPage=[];
-        }
-        
-        if(empty(array_diff($this->valueCheckedPage,$this->subchecked))){
-            $this->valueCheckedPage=$this->subchecked;
-        };
-    }
-    
-    public function updatedSubchecked($value){
-        $araydiff = array_diff($this->valueCheckedPage,$this->subchecked);
-        if(empty($araydiff)){
-            $this->selectAll=true;
-        }else{
-            $this->selectAll=false;
-        }
+    public function updatedsub_check($value){
+        dd('hallo');
     }
     
     private function resetCreateForm(){
@@ -67,7 +47,6 @@ class Usermanage extends Component
     public function add()
     {
         $this->modeEdit=false;
-        $this->dispatchBrowserEvent('show-mytable');
         $this->dispatchBrowserEvent('show-form');
         $this->resetCreateForm();
     }
@@ -79,6 +58,19 @@ class Usermanage extends Component
         $this->user_name = $user->name;
         $this->delfolder='myfiles/'.$user->id;
         $this->dispatchBrowserEvent('show-form-del');
+    }
+
+    public function removesel()
+    {
+        $this->checkedValue = User::whereIn('id',$this->checked)->get();
+        $this->dispatchBrowserEvent('show-form-delsel');
+    }
+
+    public function postremovesel()
+    {
+        User::whereIn('id',$this->checked)->delete();
+        $this->dispatchBrowserEvent('hide-form-delsel');
+        return redirect()->route('userman');
     }
 
     public function store()
