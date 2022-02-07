@@ -67,9 +67,9 @@
                                         <th class="text-center"><input type="checkbox" wire:model="selectPage"></th>
                                         <th>No</th>
                                         <th style="cursor:pointer;" wire:click="sortBy('category_name')">Category</th>
-                                        <th style="cursor:pointer;" wire:click="sortBy('myfile_name')">File Name</th>
+                                        <th style="cursor:pointer;" wire:click="sortBy('name')">File Name</th>
                                         <th style="cursor:pointer;" wire:click="sortBy('user_name')">Owner</th>
-                                        <th style="cursor:pointer;" wire:click="sortBy('myfile_updated')">updated at</th>
+                                        <th style="cursor:pointer;" wire:click="sortBy('updated_at')">updated at</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -79,9 +79,9 @@
                                         <td class="text-center"><input type="checkbox" value="{{ $row->id }}" wire:model="checked"></td>
                                         <td>{{ $myfile->firstItem() + $key}}</td>
                                         <td>{{ $row->category_name }}</td>
-                                        <td>{{ $row->myfile_name }}</td>
+                                        <td>{{ $row->name }}</td>
                                         <td>{{ $row->user_name }}</td>
-                                        <td>{{ $row->myfile_updated }}</td>
+                                        <td>{{ $row->updated_at }}</td>
                                         <td>
                                         @if(Storage::disk('local')->exists($row->path))
                                         <button wire:click.prevent="" class="btn btn-success btn-sm text-light me-1 mb-2 mb-md-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Download"><i class="bi bi-cloud-arrow-down-fill"></i></button>

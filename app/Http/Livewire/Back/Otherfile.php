@@ -7,12 +7,13 @@ use Livewire\WithPagination;
 use Illuminate\Support\Facades\Storage;
 use Spatie\Permission\Models\Role;
 use App\Models\Myfile;
+use App\Models\User;
 
 class Otherfile extends Component
 {
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
-    public $sortBy = 'myfiles.updated_at';
+    public $sortBy = 'myfile_updated';
     public $sortDirection = 'asc';
     public $perhal = 2 ;
     public $checked = [];
@@ -27,21 +28,27 @@ class Otherfile extends Component
     }
     //lifecylce hook get<namafungsi>Property
     public function getMyfileQueryProperty(){
-        return Myfile::select(
-        'myfiles.id as id',
-        'filecategories.name as category_name',
-        'myfiles.name as myfile_name',
-        'myfiles.path as path',
-        'users.name as user_name',
-        'myfiles.updated_at as myfile_updated')
-        ->join('users', 'myfiles.user_id', '=', 'users.id')
-        ->join('filecategories', 'myfiles.filecategory_id', '=', 'filecategories.id')
-        ->where('filecategories.name', 'like', '%'.$this->inpsearch.'%')
-        ->orwhere('myfiles.name', 'like', '%'.$this->inpsearch.'%')
-        ->orwhere('users.name', 'like', '%'.$this->inpsearch.'%')
-        ->orderBy($this->sortBy,$this->sortDirection);
-/*         return Myfile::with(['user','filecategory'])
-        ->cari(trim($this->inpsearch)); */
+        $myfile = Myfile::query();
+        $myfile->select('myfiles.*','users.name as user_name','filecategories.name as category_name');
+
+        $myfile->join('users','myfiles.user_id','=','users.id');
+        $myfile->join('filecategories','myfiles.filecategory_id','=','filecategories.id');
+        
+        $myfile->where('myfiles.name','like','%'.$this->inpsearch.'%');
+        $myfile->orwhere('filecategories.name','like','%'.$this->inpsearch.'%');
+        $myfile->orwhere('users.name','like','%'.$this->inpsearch.'%');
+        
+        if($this->sortBy=="name"){
+            $myfile->orderby('myfiles.name',$this->sortDirection);
+        }else if($this->sortBy=="user_name"){
+            $myfile->orderby('users.name',$this->sortDirection);
+        }else if($this->sortBy=='category_name'){
+            $myfile->orderby('filecategories.name',$this->sortDirection);
+        }else{
+            $myfile->orderby('myfiles.updated_at',$this->sortDirection);
+        }
+
+        return $myfile;
     }
     //lifecylce hook updated<namavariable>
     public function updatedSelectPage($value){
