@@ -39,7 +39,7 @@
                                     <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                         <span class="fw-bold">Selection ( {{count($checked)}} )</span>
                                     </button>
-                                    <ul class="dropdown-menu">
+                                    <ul class="dropdown-menu w-100">
                                         <li><button wire:click="removeselection" class="dropdown-item">Delete</button></li>
                                     </ul>
                                 </div>

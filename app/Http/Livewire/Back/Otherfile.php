@@ -30,14 +30,11 @@ class Otherfile extends Component
     public function getMyfileQueryProperty(){
         $myfile = Myfile::query();
         $myfile->select('myfiles.*','users.name as user_name','filecategories.name as category_name');
-
         $myfile->join('users','myfiles.user_id','=','users.id');
         $myfile->join('filecategories','myfiles.filecategory_id','=','filecategories.id');
-        
         $myfile->where('myfiles.name','like','%'.$this->inpsearch.'%');
         $myfile->orwhere('filecategories.name','like','%'.$this->inpsearch.'%');
         $myfile->orwhere('users.name','like','%'.$this->inpsearch.'%');
-        
         if($this->sortBy=="name"){
             $myfile->orderby('myfiles.name',$this->sortDirection);
         }else if($this->sortBy=="user_name"){
@@ -47,7 +44,7 @@ class Otherfile extends Component
         }else{
             $myfile->orderby('myfiles.updated_at',$this->sortDirection);
         }
-
+        
         return $myfile;
     }
     //lifecylce hook updated<namavariable>
